@@ -168,9 +168,9 @@ You can put a name here, but I'd recommend using the search instead.
 
 {% swagger method="post" path="/artists.json" baseUrl="https://e621.net" summary="Create An Artist" %}
 {% swagger-description %}
-Requires Authorization
+<mark style="color:blue;">Authorization Required</mark>
 
-Account must be older than 1 week to use this
+Account must be older than 1 week
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="artist[is_active]" type="Boolean" %}
@@ -251,11 +251,11 @@ The urls associated with the artist.
 
 {% swagger method="patch" path="/artists/:id.json" baseUrl="https://e621.net" summary="Modify An Artist" %}
 {% swagger-description %}
-Requires Authorization
+<mark style="color:blue;">Authorization Required</mark>
 
-Unless Janitor or higher, Locked/Inactive artists cannot be edited.
+<mark style="color:red;">Janitor+ Required</mark> if artist is locked or inactive
 
-Account must be older than 1 week to use this.
+Account must be older than 1 week
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -275,11 +275,15 @@ The group name for the artist.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" type="Number" name="artist[linked_user_id]" %}
-The id of the user to link with the artist. A user can be linked to multiple artists. Requires Janitor or higher.
+The id of the user to link with the artist. A user can be linked to multiple artists.&#x20;
+
+<mark style="color:red;">Janitor+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" type="Boolean" name="artist[is_locked]" %}
-If the artist should be locked. Requires janitor or higher.
+If the artist should be locked.
+
+<mark style="color:red;">Janitor+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" type="String" name="artist[name]" %}
@@ -351,13 +355,13 @@ The urls associated with the artist.
 
 {% swagger method="delete" path="/artists/:id.json" baseUrl="https://e621.net" summary="Delete An Artist" %}
 {% swagger-description %}
-Requires Authorization
+<mark style="color:blue;">Authorization Required</mark>
 
-Requires Janitor or higher
+<mark style="color:red;">Janitor+ Required</mark>
 
 This operation is idempotent
 
-Account must be older than 1 week to use this
+Account must be older than 1 week
 
 Deleting an artist does not actually delete the artist, it sets `is_active` to false
 {% endswagger-description %}
@@ -405,9 +409,9 @@ The ID of the artist to delete.
 
 {% swagger method="put" path="/artists/:id/revert.json" baseUrl="https://e621.net" summary="Revert An Artist To A Previous Version" %}
 {% swagger-description %}
-Requires Authorization
+<mark style="color:blue;">Authorization Required</mark>
 
-Account must be older than 1 week to use this
+Account must be older than 1 week
 
 This operation is idempotent
 {% endswagger-description %}

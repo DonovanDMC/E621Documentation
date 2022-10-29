@@ -1,6 +1,7 @@
 # Table of contents
 
-* [Common Errors](README.md)
+* [Home](README.md)
+* [Common Errors](<README (1).md>)
 * [Artists](artists/README.md)
   * [Artist Versions](artists/artist-versions.md)
 * [Blips](blips.md)

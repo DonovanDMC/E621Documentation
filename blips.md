@@ -71,7 +71,7 @@ The page of results to get. Numbered pages are limited to 750. Use a & b prefixe
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="get" path="/blips/:id.json" baseUrl="https://e621.net" summary="Get Blip" %}
+{% swagger method="get" path="/blips/:id.json" baseUrl="https://e621.net" summary="Get A Blip" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -107,9 +107,9 @@ The ID of the blip.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="post" path="/blips.json" baseUrl="https://e621.net" summary="Create Blip" %}
+{% swagger method="post" path="/blips.json" baseUrl="https://e621.net" summary="Create A Blip" %}
 {% swagger-description %}
-Authorization Required
+<mark style="color:blue;">Authorization Required</mark>
 
 Account must be older than 1 week
 {% endswagger-description %}
@@ -164,11 +164,11 @@ The ID of the blip to respond to.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="post" path="/blips/:id/warning.json" baseUrl="https://e621.net" summary="Add Warning To Blip" %}
+{% swagger method="post" path="/blips/:id/warning.json" baseUrl="https://e621.net" summary="Add A Warning To A Blip" %}
 {% swagger-description %}
-Requires Authentication
+<mark style="color:blue;">Authorization Required</mark>
 
-Requires Moderator or higher
+<mark style="color:green;">Moderator+ Required</mark>
 
 This operation is idempotent
 {% endswagger-description %}
@@ -228,9 +228,9 @@ The type of warning to add to the blip. One of:
 
 {% swagger method="post" path="/blips/:id/hide.json" baseUrl="https://e621.net" summary="Hide Blip" %}
 {% swagger-description %}
-Authorization Required
+<mark style="color:blue;">Authorization Required</mark>
 
-Requires moderator if the blip is not yours
+<mark style="color:green;">Moderator+Required</mark> if the blip is not yours
 
 This operation is idempotent
 {% endswagger-description %}
@@ -266,11 +266,11 @@ The ID of the blip to hide.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="post" path="/blips/:id/unhide.json" baseUrl="https://e621.net" summary="Unhide Blip" %}
+{% swagger method="post" path="/blips/:id/unhide.json" baseUrl="https://e621.net" summary="Unhide A Blip" %}
 {% swagger-description %}
-Requires Authentication
+<mark style="color:blue;">Authorization Required</mark>
 
-Requires moderator regardless
+<mark style="color:green;">Moderator+ Required</mark> regardless
 
 This operation is idempotent
 {% endswagger-description %}
@@ -303,13 +303,11 @@ The ID of the blip to unhide.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="patch" path="/blips/:id.json" baseUrl="https://e621.net" summary="Modify Blip" %}
+{% swagger method="patch" path="/blips/:id.json" baseUrl="https://e621.net" summary="Modify A Blip" %}
 {% swagger-description %}
-Requires Authentication
+<mark style="color:blue;">Authorization Required</mark>
 
-Requires Moderator if the blip is not yours
-
-Blips older than 5 minutes cannot be edited by non-moderators.
+<mark style="color:green;">Moderator+ Required</mark> if the blip is not yours, or is older than 5 minutes
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -341,11 +339,11 @@ The new body of the blip.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="delete" path="/blips/:id.json" baseUrl="https://e621.net" summary="Delete Blip" %}
+{% swagger method="delete" path="/blips/:id.json" baseUrl="https://e621.net" summary="Delete A Blip" %}
 {% swagger-description %}
-Requires Authentication
+<mark style="color:blue;">Authorization Required</mark>
 
-Requires Moderator
+<mark style="color:green;">Moderator+ Required</mark>
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}

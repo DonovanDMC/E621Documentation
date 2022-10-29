@@ -1,54 +1,11 @@
-# Common Errors
+# Home
 
-```javascript
-// 403 Forbidden - Access Denied
-// Typically shows on this you cannot do, like deleting posts.
-{
-    "success": false,
-    "reason": "Access Denied"
-}
-```
+This is documentation for https://e621.net's api, as theirs is pretty bad.\
+Their [api documentation](https://e621.net/wiki\_pages/2425) has gotten better, but it's typically hard to read, lacks a lot of endpoints, lacks many parameters which could be useful, and sometimes even outdated.
 
-```javascript
-// 403 Forbidden - Unpermitted Parameter
-// This will show for any parameters you cannot use, including those that do not exist.
-// Not all routes validate parameters, some ignore unpermitted parameters.
-{
-    "success": false,
-    "reason": "found unpermitted parameter: :name"
-}
-```
+This is an effort to make as accurate as possible documentation. If you would like to contribute, you can do so [here](https://github.com/DonovanDMC/E621Documentation).
 
-```javascript
-// 410 Gone - Page Beyond 750
-// use a & b pagination
-{
-    "success": false,
-    "message": "You cannot go beyond page 750. Please narrow your search terms.",
-    "code": null
-}
-```
+If you're wondering "How did you get all of this information", I've familiarized myself with e621's code base on a surface level. Not enough to truly dive into it, but enough to be able to read and understand what's happening. I combine that with running my own instance to test various methods to ensure this documentation is as complete as possible.
 
-```javascript
-// 422 Unprocessible Entity - Account Too New
-// Account must be older than 1 week.
-{
-    "errors": {
-        "base": [
-            "User can not yet perform this action. Account is too new."
-        ]
-    }
-}
-```
-
-```javascript
-// 422 Unprocessible Entity - RateLimited
-{
-    "errors": {
-        "creator": [
-            "have reached the hourly limit for this action"
-        ]
-    }
-}
-```
+If you would like to also dive into the hell that is ruby on rails, e621's code is publicly available. [https://github.com/zwagoth/e621ng](https://github.com/zwagoth/e621ng)
 

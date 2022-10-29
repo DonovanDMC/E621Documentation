@@ -29,6 +29,10 @@ The grouping of the returned results. On of
 .
 {% endswagger-parameter %}
 
+{% swagger-parameter in="query" name="search[body_matches]" type="String" %}
+The body of the comment.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="query" name="search[do_not_bump_post]" type="Boolean" %}
 If the post did not bump. The UI for searching inverts this option.
 {% endswagger-parameter %}
@@ -59,6 +63,10 @@ The IP Address of the creator of the comment. Requires Moderator.
 
 {% swagger-parameter in="query" name="search[post_id]" type="Number" %}
 The ID of the post the comment was made on.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[poster_id]" type="Number" %}
+The ID of the user that created the post the comment is on.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[order]" type="String" %}
@@ -173,7 +181,7 @@ The page of results to get. Numbered pages are limited to 750. Use a & b prefixe
         "id": 0,
         "post_id": 0,
         "creator_id": 0,
-        "body": "wooof",
+        "body": "content",
         "score": 0,
         "created_at": "0000-00-00T00:00:00.000-00:00",
         "updated_at": "0000-00-00T00:00:00.000-00:00",
@@ -184,7 +192,7 @@ The page of results to get. Numbered pages are limited to 750. Use a & b prefixe
         "warning_type": null, // same as blips, "warning", "record", "ban"
         "warning_user_id": null,
         "creator_name": "name",
-        "updater_name": "name" // haven't seen this as null
+        "updater_name": "name" // always present
     }
 ]
 ```
@@ -200,7 +208,7 @@ The page of results to get. Numbered pages are limited to 750. Use a & b prefixe
 ```
 {% endswagger-response %}
 
-{% swagger-response status="200: OK" description="Success (No Results, `group_by=comment`) !!" %}
+{% swagger-response status="200: OK" description="Success (No Results, `group_by=comment`)" %}
 ```javascript
 {
     "comments": []
@@ -209,11 +217,409 @@ The page of results to get. Numbered pages are limited to 750. Use a & b prefixe
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="post" path="/comments.json" baseUrl="https://e621.net" summary="Create a Comment" %}
+{% swagger method="get" path="/comments/:id.json" baseUrl="https://e621.net" summary="Get A Comment" %}
 {% swagger-description %}
-Authorization Required
+
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the comment.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Success" %}
+```javascript
+{
+    "id": 0,
+    "post_id": 0,
+    "creator_id": 0,
+    "body": "content",
+    "score": 0,
+    "created_at": "0000-00-00T00:00:00.000-00:00",
+    "updated_at": "0000-00-00T00:00:00.000-00:00",
+    "updater_id": 0,
+    "do_not_bump_post": false,
+    "is_hidden": false,
+    "is_sticky": false,
+    "warning_type": null, // "warning", "record", "ban"
+    "warning_user_id": null,
+    "creator_name": "name",
+    "updater_name": "name" // always present
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied (Hidden)" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Not Found" %}
+```javascript
+{
+    "success": false,
+    "reason": "not found"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="post" path="/comments.json" baseUrl="https://e621.net" summary="Create A Comment" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
 
 Account must be older than 1 week
 {% endswagger-description %}
+
+{% swagger-parameter in="body" name="comment[body]" type="String" required="true" %}
+The body of the comment.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="comment[post_id]" required="true" type="Number" %}
+The ID of the post to comment on.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="comment[do_not_bump_post]" type="Boolean" %}
+If the post should not be bumped.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="comment[is_hidden]" type="Boolean" %}
+If the comment should be hidden.
+
+<mark style="color:green;">Moderator+ Required</mark>
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="comment[is_sticky]" type="Boolean" %}
+If the comment should be stuck to the top of the comment section (post as moderator).
+
+<mark style="color:green;">Moderator+ Required</mark>
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="Success" %}
+```javascript
+{
+    "id": 0,
+    "post_id": 0,
+    "creator_id": 0,
+    "body": "content",
+    "score": 0,
+    "created_at": "0000-00-00T00:00:0.000-00:00",
+    "updated_at": "0000-00-00T00:00:0.000-00:00",
+    "updater_id": 0,
+    "do_not_bump_post": false,
+    "is_hidden": false,
+    "is_sticky": false,
+    "warning_type": null, // "warning", "record", "ban"
+    "warning_user_id": null,
+    "creator_name": "name",
+    "updater_name": "name" // always present
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Account Too New" %}
+```javascript
+{
+    "errors": {
+        "base": [
+            "User can not yet perform this action. Account is too new."
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="No Body Content" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "has no content"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Short" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "is too short (minimum is 1 character)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Missing or Invalid post_id" %}
+```javascript
+{
+    "errors": {
+        "post": [
+            "must exist",
+            "must exist"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Comments Disabled" %}
+```javascript
+{
+    "errors": {
+        "base": [
+            "Post has comments disabled"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="post" path="/comments/:id/warning.json" baseUrl="https://e621.net" summary="Add A Warning To A Comment" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:green;">Moderator+ Required</mark>
+
+This operation is idempotent
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the comment to add a warning to.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="record_type" type="String" required="true" %}
+The type of warning to add to the comment. One of: 
+
+`warning`
+
+, 
+
+`record`
+
+, 
+
+`ban`
+
+, 
+
+`unmark`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Success" %}
+```javascript
+{
+    "html": "<new comment section html contents",
+    "posts": {} // unknown
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="500: Internal Server Error" description="Invalid Warning Type" %}
+```javascript
+{
+    "success": false,
+    "message": "'TYPE' is not a valid warning_type",
+    "code": "UUID"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="post" path="/comments/:id/hide.json" baseUrl="https://e621.net" summary="Hide A Comment" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:green;">Moderator+Required</mark> if the comment is not yours
+
+This operation is idempotent
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the comment to hide.
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="Success" %}
+```javascript
+{
+    "id": 0,
+    "post_id": 0,
+    "creator_id": 0,
+    "body": "content",
+    "score": 0,
+    "created_at": "0000-00-00T00:00:0.000-00:00",
+    "updated_at": "0000-00-00T00:00:0.000-00:00",
+    "updater_id": 0,
+    "do_not_bump_post": false,
+    "is_hidden": false,
+    "is_sticky": false,
+    "warning_type": null, // "warning", "record", "ban"
+    "warning_user_id": null,
+    "creator_name": "name",
+    "updater_name": "name" // always present
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="post" path="/comments/:id/unhide.json" baseUrl="https://e621.net" summary="Unhide A Comment" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:green;">Moderator+ Required</mark> regardless
+
+This operation is idempotent
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the blip to unhide.
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="Success" %}
+```javascript
+{
+    "id": 0,
+    "post_id": 0,
+    "creator_id": 0,
+    "body": "content",
+    "score": 0,
+    "created_at": "0000-00-00T00:00:0.000-00:00",
+    "updated_at": "0000-00-00T00:00:0.000-00:00",
+    "updater_id": 0,
+    "do_not_bump_post": false,
+    "is_hidden": false,
+    "is_sticky": false,
+    "warning_type": null, // "warning", "record", "ban"
+    "warning_user_id": null,
+    "creator_name": "name",
+    "updater_name": "name" // always present
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="patch" path="/comments/:id.json" baseUrl="https://e621.net" summary="Modify A Comment" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:green;">Moderator+ Required</mark> if the comment is not yours
+
+Edits performed within 5 minutes of creation will not show the "edited" text
+
+If the comment is not yours, the edit text will show "updated by NAME". This ignores the normal time window.
+
+This operation is idempotent
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="comment[body]" type="String" %}
+The new body of the comment.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the comment.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="comment[is_hidden]" type="Boolean" %}
+If the comment should be hidden.
+
+<mark style="color:green;">Moderator+ Required</mark>
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="comment[is_sticky]" type="Boolean" %}
+If the comment should be stuck to the top of the comment section (post as moderator).
+
+<mark style="color:green;">Moderator+ Required</mark>
+{% endswagger-parameter %}
+
+{% swagger-response status="204: No Content" description="Success" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="delete" path="/comments/:id.json" baseUrl="https://e621.net" summary="Delete A Comment" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:green;">Moderator+ Required</mark>
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the comment to delete.
+{% endswagger-parameter %}
+
+{% swagger-response status="204: No Content" description="Success" %}
+```javascript
+{
+    // Response
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Not Found" %}
+```javascript
+{
+    "success": false,
+    "reason": "not found"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
