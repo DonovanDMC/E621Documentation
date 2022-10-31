@@ -271,7 +271,7 @@ The ID of the comment.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="comment[body]" type="String" required="true" %}
@@ -332,7 +332,7 @@ If the comment should be stuck to the top of the comment section (post as modera
 ```
 {% endswagger-response %}
 
-{% swagger-response status="422: Unprocessable Entity" description="No Body Content" %}
+{% swagger-response status="422: Unprocessable Entity" description="Empty Body" %}
 ```javascript
 {
     "errors": {
@@ -350,6 +350,18 @@ If the comment should be stuck to the top of the comment section (post as modera
     "errors": {
         "body": [
             "is too short (minimum is 1 character)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Long" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "is too long (maximum is 10000 characters)"
         ]
     }
 }
@@ -583,6 +595,42 @@ If the comment should be stuck to the top of the comment section (post as modera
 }
 ```
 {% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Empty Body" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "has no content"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Short" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "has no content"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Long" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "is too long (maximum is 10000 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% swagger method="delete" path="/comments/:id.json" baseUrl="https://e621.net" summary="Delete A Comment" %}
@@ -618,6 +666,121 @@ The ID of the comment to delete.
 {
     "success": false,
     "reason": "not found"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="post" path="/comments/:id/votes.json" baseUrl="https://e621.net" summary="Vote On A Comment" %}
+{% swagger-description %}
+To remove an existing vote, send a request with the current vote. (e.g. -1 = send -1, they will cancel out). You can also use the `DELETE` method.
+
+<mark style="color:blue;">Authorization Required</mark>
+
+Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the comment to vote on.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="score" type="String" required="true" %}
+The vote. 
+
+`1`
+
+ or 
+
+`-1`
+
+.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="no_unvote" type="Boolean" %}
+If an unvote should not be allowed. Note: This MUST be the exact string "true" to work. (also see note in success response)
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Success" %}
+```javascript
+{
+    "score": 1,
+    "our_score": 1 // our current vote: -1, 0, 1
+}
+// Note on our_score: if no_unvote=true,
+// our_score will always be 0 if a vote was previosuly present
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Own Comment" %}
+```javascript
+{
+    "success": false,
+    "message": "Validation failed: You cannot vote on your own comments",
+    "code": null
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Invalid Vote" %}
+```javascript
+{
+    "success": false,
+    "message": "Invalid vote",
+    "code": null
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Account Too New" %}
+```javascript
+{
+    "success": false,
+    "message": "Validation failed: User can not yet perform this action. Account is too new",
+    "code": null
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Locked Vote" %}
+```javascript
+{
+    "success": false,
+    "message": "Vote is locked",
+    "code": null
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="delete" path="/comments/:id/votes.json" baseUrl="https://e621.net" summary="Remove A Comment Vote" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the comment.
+{% endswagger-parameter %}
+
+{% swagger-response status="204: No Content" description="Success" %}
+```javascript
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Invalid Comment" %}
+```javascript
+{
+    "success": false,
+    "reason": "not found"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Locked Vote" %}
+```javascript
+{
+    "success": false,
+    "message": "You can't remove locked votes",
+    "code": null
 }
 ```
 {% endswagger-response %}

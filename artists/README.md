@@ -170,7 +170,13 @@ You can put a name here, but I'd recommend using the search instead.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+
+`other_names` & `urls` are silently truncated to 25 entries
+
+`notes` is silently truncated to the wiki page limit (250,000)
+
+individual `other_names` entries are silently truncated to 100 characters&#x20;
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="artist[is_active]" type="Boolean" %}
@@ -205,7 +211,7 @@ The other names for the artist.
 The urls associated with the artist.
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="Successfully Created" %}
+{% swagger-response status="201: Created" description="Successfully Created" %}
 ```javascript
 {
     "id": 0,
@@ -247,6 +253,54 @@ The urls associated with the artist.
 }
 ```
 {% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Empty Name" %}
+```javascript
+{
+    "errors": {
+        "name": [
+            "'' cannot be blank"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Name Too Long" %}
+```javascript
+{
+    "errors": {
+        "group_name": [
+            "is too long (maximum is 100 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Group Name Too Long" %}
+```javascript
+{
+    "errors": {
+        "group_name": [
+            "is too long (maximum is 100 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="URL Too Long" %}
+```javascript
+{
+    "errors": {
+        "urls.url": [
+            "is too long (maximum is 4096 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% swagger method="patch" path="/artists/:id.json" baseUrl="https://e621.net" summary="Modify An Artist" %}
@@ -255,7 +309,13 @@ The urls associated with the artist.
 
 <mark style="color:red;">Janitor+ Required</mark> if artist is locked or inactive
 
-Account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+
+`other_names` & `urls` are silently truncated to 25 entries
+
+`notes` is silently truncated to the wiki page limit (250,000)
+
+individual `other_names` entries are silently truncated to 100 characters&#x20;
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -351,6 +411,42 @@ The urls associated with the artist.
 }
 ```
 {% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Name Too Long" %}
+```javascript
+{
+    "errors": {
+        "group_name": [
+            "is too long (maximum is 100 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Group Name Too Long" %}
+```javascript
+{
+    "errors": {
+        "group_name": [
+            "is too long (maximum is 100 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="URL Too Long" %}
+```javascript
+{
+    "errors": {
+        "urls.url": [
+            "is too long (maximum is 4096 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% swagger method="delete" path="/artists/:id.json" baseUrl="https://e621.net" summary="Delete An Artist" %}
@@ -360,8 +456,6 @@ The urls associated with the artist.
 <mark style="color:red;">Janitor+ Required</mark>
 
 This operation is idempotent
-
-Account must be older than 1 week
 
 Deleting an artist does not actually delete the artist, it sets `is_active` to false
 {% endswagger-description %}
@@ -411,7 +505,7 @@ The ID of the artist to delete.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
 
 This operation is idempotent
 {% endswagger-description %}

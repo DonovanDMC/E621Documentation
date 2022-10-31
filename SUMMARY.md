@@ -6,3 +6,4 @@
   * [Artist Versions](artists/artist-versions.md)
 * [Blips](blips.md)
 * [Comments](comments.md)
+* [Notes](notes.md)

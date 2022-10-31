@@ -111,7 +111,7 @@ The ID of the blip.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="blip[body]" type="String" required="true" %}
@@ -139,12 +139,36 @@ The ID of the blip to respond to.
 ```
 {% endswagger-response %}
 
-{% swagger-response status="422: Unprocessable Entity" description="Too Short" %}
+{% swagger-response status="422: Unprocessable Entity" description="Empty Body" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "can't be blank"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Short" %}
 ```javascript
 {
     "errors": {
         "body": [
             "is too short (minimum is 5 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Long" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "is too long (maximum is 1000 characters)"
         ]
     }
 }
@@ -334,6 +358,42 @@ The new body of the blip.
 {
     "success": false,
     "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Empty Body" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "can't be blank"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Short" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "is too short (minimum is 5 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Long" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "is too long (maximum is 1000 characters)"
+        ]
+    }
 }
 ```
 {% endswagger-response %}

@@ -1,5 +1,7 @@
 # Common Errors
 
+<mark style="color:red;">Note the typical</mark> <mark style="color:red;"></mark><mark style="color:red;">`errors`</mark> <mark style="color:red;"></mark><mark style="color:red;">key can vary wildly between routes. Some return an array, some return an object with keys referencing what the error is for, others don't return at all. Assume all routes are inconsistent with each other. Errors can also be combined. For instance,</mark> <mark style="color:red;"></mark><mark style="color:red;">`no content`</mark> <mark style="color:red;"></mark><mark style="color:red;">errors are typically paired with</mark> <mark style="color:red;"></mark><mark style="color:red;">`too short`</mark> <mark style="color:red;"></mark><mark style="color:red;">errors.</mark>
+
 ```javascript
 // 403 Forbidden - Access Denied
 // Typically shows on this you cannot do, like deleting posts.
@@ -52,3 +54,14 @@
 }
 ```
 
+
+
+```
+// 401 Unauthorized
+// returned on routes blocked users cannot use
+{
+    "success": false,
+    "message": "Account is banned: forever",
+    "code": null
+}
+```
