@@ -5,35 +5,35 @@
 
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="search[topic_title_matches]" type="String" %}
+{% swagger-parameter in="query" name="search[topic_title_matches]" type="String" required="false" %}
 The title of the topic the forum post is under.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[id]" type="Number" %}
+{% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
 The ID of the forum post.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[body_matches]" type="String" %}
+{% swagger-parameter in="query" name="search[body_matches]" type="String" required="false" %}
 The body of the post.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[creator_id]" type="Number" %}
+{% swagger-parameter in="query" name="search[creator_id]" type="Number" required="false" %}
 The ID of the creator of the forum post.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[creator_name]" type="String" %}
+{% swagger-parameter in="query" name="search[creator_name]" type="String" required="false" %}
 The name of the creator of the forum post.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[topic_category_id]" type="Number" %}
+{% swagger-parameter in="query" name="search[topic_category_id]" type="Number" required="false" %}
 The ID of the category the forum post is under
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="limit" type="Number" %}
+{% swagger-parameter in="query" name="limit" type="Number" required="false" %}
 The maximum number of forum posts to return. Between 20 and 320
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="page" type="Number" %}
+{% swagger-parameter in="query" name="page" type="Number" required="false" %}
 The page of results to get. Numbered pages are limited to 750. Use a & b prefixes with a forum post id for after and before respectively.
 {% endswagger-parameter %}
 
@@ -78,20 +78,20 @@ This operation is idempotent
 The ID of the forum post to add a warning to.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="record_type" type="String" required="false" %}
-The type of warning to add to the forum post. One of:
+{% swagger-parameter in="body" name="record_type" type="String" required="true" %}
+The type of warning to add to the forum post. One of: 
 
 `warning`
 
-,
+, 
 
 `record`
 
-,
+, 
 
 `ban`
 
-,
+, 
 
 `unmark`
 
