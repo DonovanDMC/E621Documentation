@@ -1,10 +1,14 @@
 ---
-description: GET /forum_categories does not support JSON
+description: >-
+  These are very poorly documented as the routes are admin only, typically only
+  respond with html (unless an error shows up), and are extremely unpredictable.
 ---
 
 # Forum Categories
 
-{% swagger method="post" path="/forum_categories" baseUrl="https://e621.net" summary="Create Forum Category" %}
+GET /forum\_categories does not support JSON
+
+{% swagger method="post" path="/forum_categories.json" baseUrl="https://e621.net" summary="Create Forum Category" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
@@ -61,6 +65,15 @@ The sorting order of this category.
 }
 ```
 {% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% swagger method="patch" path="/forum_categories/:id.json" baseUrl="https://e621.net" summary="Edit Forum Category" %}
@@ -99,5 +112,69 @@ The level users must be to view topics in this category.
 {% swagger-parameter in="body" name="forum_category[cat_order]" type="Number" %}
 The sorting order of this category.
 {% endswagger-parameter %}
+
+{% swagger-response status="302: Found" description="General Response" %}
+```html
+<!-- This will be returned regardless of if anything was changed (unless the controller or database returns an error) -->
+<html><body>You are being <a href="https://e621.net/forum_categories">redirected</a>.</body></html>
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Not Found" %}
+```javascript
+{
+    "success": false,
+    "reason": "not found"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="delete" path="/forum_categories/:id.json" baseUrl="https://e621.net" summary="Delete A Forum Category" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:yellow;">Admin+ Required</mark>
+
+As fa as I can tell, there is no way to use this from the ui, so forum categories are not meant to be deleted. They still can be deleted, but it will return an error
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" %}
+The ID of the forum category to delete.
+{% endswagger-parameter %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Not Found" %}
+```javascript
+{
+    "success": false,
+    "reason": "not found"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="406: Not Acceptable" description="Success(?)" %}
+<pre class="language-javascript"><code class="lang-javascript">// In my testing, this DOES mean the category was deleted,
+// though what state it and other various components are
+// left in is up in the air.
+<strong>// HTML Response</strong></code></pre>
+{% endswagger-response %}
 {% endswagger %}
 

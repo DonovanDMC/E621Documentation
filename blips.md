@@ -342,14 +342,14 @@ The ID of the blip to edit.
 The new body of the blip.
 {% endswagger-parameter %}
 
-{% swagger-response status="204: No Content" description="Success" %}
+{% swagger-response status="200: OK" description="Too Old" %}
 ```javascript
+// HTML Response, nothing changed
 ```
 {% endswagger-response %}
 
-{% swagger-response status="302: Found" description="Too Old" %}
-```html
-<html><body>You are being <a href="https://e621.net/blips">redirected</a>.</body></html>
+{% swagger-response status="204: No Content" description="Success" %}
+```javascript
 ```
 {% endswagger-response %}
 

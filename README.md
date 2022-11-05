@@ -9,5 +9,3 @@ If you're wondering "How did you get all of this information", I've familiarized
 
 If you would like to also dive into the hell that is ruby on rails, e621's code is publicly available. [https://github.com/zwagoth/e621ng](https://github.com/zwagoth/e621ng)
 
-Note: If for some reason you are unable to use HTTP Verbs like PATCH, PUT, DELETE, etc, you can use `_method=METHOD` in a POST body, ex `_method=PATCH`
-
