@@ -224,7 +224,7 @@ The type of warning to add to the blip. One of:
 {% swagger-response status="200: OK" description="Success" %}
 ```javascript
 {
-    "html": "<new blip html contents",
+    "html": "<new blip html contents>",
     "posts": {} // unknown
 }
 ```
