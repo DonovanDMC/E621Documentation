@@ -250,7 +250,7 @@ The type of warning to add to the blip. One of:
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="post" path="/blips/:id/hide.json" baseUrl="https://e621.net" summary="Hide Blip" %}
+{% swagger method="post" path="/blips/:id/hide.json" baseUrl="https://e621.net" summary="Hide A Blip" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 

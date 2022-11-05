@@ -83,7 +83,6 @@ Some topics may be in specific categories that require certain user levels.
 
 {% swagger-response status="200: OK" description="Success" %}
 ```javascript
-
 {
     "id": 0,
     "creator_id": 0,
@@ -115,6 +114,87 @@ Some topics may be in specific categories that require certain user levels.
     "success": false,
     "reason": "not found"
 }
+```
+{% endswagger-response %}
+{% endswagger %}
+
+
+{% endswagger %}
+
+{% swagger method="post" path="/forum_topics/:id/hide.json" baseUrl="https://e621.net" summary="Hide A Forum Topic" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:green;">Moderator+Required</mark> if the topic is not yours
+
+This operation is idempotent
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the forum topic to hide.
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="Success" %}
+```javascript
+{
+    "id": 0,
+    "creator_id": 0,
+    "updater_id": 0,
+    "title": "content",
+    "response_count": 0,
+    "is_sticky": false,
+    "is_locked": false,
+    "is_hidden": false,
+    "created_at": "0000-00-00T00:00:00.000-00:00",
+    "updated_at": "0000-00-00T00:00:00.000-00:00",
+    "category_id": 0
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="post" path="/forum_topics/:id/unhide.json" baseUrl="https://e621.net" summary="Unhide A Forum Topic" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:green;">Moderator+ Required</mark> regardless
+
+This operation is idempotent
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" %}
+The ID of the forum topic to unhide.
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="Success" %}
+```javascript
+{
+    "id": 0,
+    "creator_id": 0,
+    "body": "body",
+    "response_to": null, // blip id
+    "created_at": "00-00-00T00:00:00.000-00:00",
+    "updated_at": "00-00-00T00:00:00.000-00:00",
+    "is_hidden": false,
+    "warning_type": null, // "warning", "record", "ban"
+    "warning_user_id": null, // user id
+    "creator_name": "name"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+// HTML Response
 ```
 {% endswagger-response %}
 {% endswagger %}
