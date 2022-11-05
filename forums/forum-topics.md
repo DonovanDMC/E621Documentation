@@ -8,31 +8,31 @@ E621 does not provide a form to search topics, so the information here may be in
 {% endswagger-description %}
 
 {% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
-The ID of the topic to search for.
+The ID of the forum topic to search for.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[title_matches]" type="String" required="false" %}
-The title of the topic (fuzzy matching).
+The title of the forum topic (fuzzy matching).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[title]" type="String" required="false" %}
-The title of the topic (exact matching).
+The title of the forum topic (exact matching).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[is_locked]" type="Boolean" required="false" %}
-If the topic is locked.
+If the forum topic is locked.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[is_sticky]" type="Boolean" required="false" %}
-If the topic is stickied.
+If the forum topic is stickied.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[is_hidden]" type="Boolean" required="false" %}
-If the topic is hidden.
+If the forum topic is hidden.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[category_id]" type="Number" required="false" %}
-The ID of the category the topic is in.
+The ID of the category the forum topic is in.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[order]" type="String" required="false" %}
@@ -42,11 +42,11 @@ The order of the returned results. One of:
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" required="false" %}
-The maximum number of comments to return. Between 20 and 320
+The maximum number of forum topics to return. Between 20 and 320
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="page" type="Number" required="false" %}
-The page of results to get. Numbered pages are limited to 750. Use a & b prefixes with a comment id for after and before respectively.
+The page of results to get. Numbered pages are limited to 750. Use a & b prefixes with a forum topic id for after and before respectively.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Success (Results)" %}
@@ -348,6 +348,22 @@ The ID of the topic to unsubscribe from.
     "success": false,
     "reason": "not found"
 }
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="post" path="/forum_topics/mark_all_as_read.json" baseUrl="https://e621.net" summary="Mark All Forum Topics As Read" %}
+{% swagger-description %}
+<mark style="color:blue;">
+
+Authorization Required
+
+</mark>
+{% endswagger-description %}
+
+{% swagger-response status="302: Found" description="Success" %}
+```javascript
+<html><body>You are being <a href="https://e621.net/forum_topics">redirected</a>.</body></html>
 ```
 {% endswagger-response %}
 {% endswagger %}
