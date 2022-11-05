@@ -36,6 +36,7 @@
 // Account must be older than 1 week.
 {
     "errors": {
+        // the specific key and wording may vary
         "base": [
             "User can not yet perform this action. Account is too new."
         ]
@@ -54,7 +55,7 @@
 }
 ```
 
-```
+```javascript
 // 401 Unauthorized
 // returned on routes blocked users cannot use
 {

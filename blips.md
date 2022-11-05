@@ -5,41 +5,41 @@
 
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="search[creator_name]" %}
+{% swagger-parameter in="query" name="search[creator_name]" required="false" %}
 Search by the name of the creator of the blip.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[creator_id]" %}
+{% swagger-parameter in="query" name="search[creator_id]" required="false" %}
 Search by the id of the creator of the blip.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[body_matches]" %}
+{% swagger-parameter in="query" name="search[body_matches]" required="false" %}
 Search by the body of the blip.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[response_to]" %}
+{% swagger-parameter in="query" name="search[response_to]" required="false" %}
 Search by the blip the blip is responding to.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[ip_addr]" %}
+{% swagger-parameter in="query" name="search[ip_addr]" required="false" %}
 Search by the ip address of the creator. Requires Moderator.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[order]" type="String" %}
-The order of returned results. One of: 
+{% swagger-parameter in="query" name="search[order]" type="String" required="false" %}
+The order of returned results. One of:
 
 `id_desc`
 
-, 
+,
 
 `updated_at_desc`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="limit" type="Number" %}
+{% swagger-parameter in="query" name="limit" type="Number" required="false" %}
 The maximum number of artists to return. Between 20 and 320
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="page" %}
+{% swagger-parameter in="query" name="page" required="false" %}
 The page of results to get. Numbered pages are limited to 750. Use a & b prefixes with an artist id for after and before respectively.
 {% endswagger-parameter %}
 
@@ -118,7 +118,7 @@ Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 
 The body of the blip.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="blip[response_to]" type="Number" %}
+{% swagger-parameter in="body" name="blip[response_to]" type="Number" required="false" %}
 The ID of the blip to respond to.
 {% endswagger-parameter %}
 
@@ -201,20 +201,20 @@ This operation is idempotent
 The ID of the blip to add a warning to.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="record_type" type="String" %}
-The type of warning to add to the blip. One of: 
+{% swagger-parameter in="body" name="record_type" type="String" required="false" %}
+The type of warning to add to the blip. One of:
 
 `warning`
 
-, 
+,
 
 `record`
 
-, 
+,
 
 `ban`
 
-, 
+,
 
 `unmark`
 
@@ -299,7 +299,7 @@ The ID of the blip to hide.
 This operation is idempotent
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="id" type="Number" %}
+{% swagger-parameter in="path" name="id" type="Number" required="false" %}
 The ID of the blip to unhide.
 {% endswagger-parameter %}
 
@@ -322,7 +322,10 @@ The ID of the blip to unhide.
 
 {% swagger-response status="403: Forbidden" description="Access Denied" %}
 ```javascript
-// HTML Response
+{
+    "success": false,
+    "reason": "Access Denied"
+}
 ```
 {% endswagger-response %}
 {% endswagger %}
