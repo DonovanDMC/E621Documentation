@@ -12,7 +12,7 @@ GET /forum\_categories does not support JSON
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:yellow;">Admin+ Required</mark>
+<mark style="color:yellow;">Admin Required</mark>
 
 Due to this being admin only and typically ui based, there are no standard responses for errors or otherwise.
 {% endswagger-description %}
@@ -80,7 +80,7 @@ The sorting order of this category.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:yellow;">Admin+ Required</mark>
+<mark style="color:yellow;">Admin Required</mark>
 
 Due to this being admin only and typically ui based, there are no standard responses for errors or otherwise.
 {% endswagger-description %}
@@ -143,7 +143,7 @@ The sorting order of this category.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:yellow;">Admin+ Required</mark>
+<mark style="color:yellow;">Admin Required</mark>
 
 As fa as I can tell, there is no way to use this from the ui, so forum categories are not meant to be deleted. They still can be deleted, but it will return an error
 {% endswagger-description %}

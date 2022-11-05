@@ -267,6 +267,133 @@ The ID of the comment.
 {% endswagger-response %}
 {% endswagger %}
 
+{% swagger method="post" path="/comments.json" baseUrl="https://e621.net" summary="Create A Comment" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="comment[body]" type="String" required="true" %}
+The body of the comment.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="comment[post_id]" required="true" type="Number" %}
+The ID of the post to comment on.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="comment[do_not_bump_post]" type="Boolean" %}
+If the post should not be bumped.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="comment[is_hidden]" type="Boolean" %}
+If the comment should be hidden.
+
+<mark style="color:green;">Moderator+ Required</mark>
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="comment[is_sticky]" type="Boolean" %}
+If the comment should be stuck to the top of the comment section (post as moderator).
+
+<mark style="color:green;">Moderator+ Required</mark>
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="Success" %}
+```javascript
+{
+    "id": 0,
+    "post_id": 0,
+    "creator_id": 0,
+    "body": "content",
+    "score": 0,
+    "created_at": "0000-00-00T00:00:0.000-00:00",
+    "updated_at": "0000-00-00T00:00:0.000-00:00",
+    "updater_id": 0,
+    "do_not_bump_post": false,
+    "is_hidden": false,
+    "is_sticky": false,
+    "warning_type": null, // "warning", "record", "ban"
+    "warning_user_id": null,
+    "creator_name": "name",
+    "updater_name": "name" // always present
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Account Too New" %}
+```javascript
+{
+    "errors": {
+        "base": [
+            "User can not yet perform this action. Account is too new."
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Empty Body" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "has no content"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Short" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "is too short (minimum is 1 character)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Long" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "is too long (maximum is 10000 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Missing or Invalid post_id" %}
+```javascript
+{
+    "errors": {
+        "post": [
+            "must exist",
+            "must exist"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Comments Disabled" %}
+```javascript
+{
+    "errors": {
+        "base": [
+            "Post has comments disabled"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
 {% swagger method="post" path="/comments/:id/warning.json" baseUrl="https://e621.net" summary="Add A Warning To A Comment" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
@@ -414,133 +541,6 @@ The ID of the blip to unhide.
 {
     "success": false,
     "reason": "Access Denied"
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% swagger method="post" path="/comments.json" baseUrl="https://e621.net" summary="Create A Comment" %}
-{% swagger-description %}
-<mark style="color:blue;">Authorization Required</mark>
-
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
-{% endswagger-description %}
-
-{% swagger-parameter in="body" name="comment[body]" type="String" required="true" %}
-The body of the comment.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="comment[post_id]" required="true" type="Number" %}
-The ID of the post to comment on.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="comment[do_not_bump_post]" type="Boolean" %}
-If the post should not be bumped.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="comment[is_hidden]" type="Boolean" %}
-If the comment should be hidden.
-
-<mark style="color:green;">Moderator+ Required</mark>
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="comment[is_sticky]" type="Boolean" %}
-If the comment should be stuck to the top of the comment section (post as moderator).
-
-<mark style="color:green;">Moderator+ Required</mark>
-{% endswagger-parameter %}
-
-{% swagger-response status="201: Created" description="Success" %}
-```javascript
-{
-    "id": 0,
-    "post_id": 0,
-    "creator_id": 0,
-    "body": "content",
-    "score": 0,
-    "created_at": "0000-00-00T00:00:0.000-00:00",
-    "updated_at": "0000-00-00T00:00:0.000-00:00",
-    "updater_id": 0,
-    "do_not_bump_post": false,
-    "is_hidden": false,
-    "is_sticky": false,
-    "warning_type": null, // "warning", "record", "ban"
-    "warning_user_id": null,
-    "creator_name": "name",
-    "updater_name": "name" // always present
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Account Too New" %}
-```javascript
-{
-    "errors": {
-        "base": [
-            "User can not yet perform this action. Account is too new."
-        ]
-    }
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Empty Body" %}
-```javascript
-{
-    "errors": {
-        "body": [
-            "has no content"
-        ]
-    }
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Body Too Short" %}
-```javascript
-{
-    "errors": {
-        "body": [
-            "is too short (minimum is 1 character)"
-        ]
-    }
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Body Too Long" %}
-```javascript
-{
-    "errors": {
-        "body": [
-            "is too long (maximum is 10000 characters)"
-        ]
-    }
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Missing or Invalid post_id" %}
-```javascript
-{
-    "errors": {
-        "post": [
-            "must exist",
-            "must exist"
-        ]
-    }
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Comments Disabled" %}
-```javascript
-{
-    "errors": {
-        "base": [
-            "Post has comments disabled"
-        ]
-    }
 }
 ```
 {% endswagger-response %}
