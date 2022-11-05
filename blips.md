@@ -107,6 +107,87 @@ The ID of the blip.
 {% endswagger-response %}
 {% endswagger %}
 
+{% swagger method="post" path="/blips.json" baseUrl="https://e621.net" summary="Create A Blip" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+{% endswagger-description %}
+
+{% swagger-parameter in="body" name="blip[body]" type="String" required="true" %}
+The body of the blip.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="blip[response_to]" type="Number" required="false" %}
+The ID of the blip to respond to.
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="Success" %}
+```javascript
+{
+    "id": 0,
+    "creator_id": 0,
+    "body": "body",
+    "response_to": null, // blip id
+    "created_at": "00-00-00T00:00:00.000-00:00",
+    "updated_at": "00-00-00T00:00:00.000-00:00",
+    "is_hidden": false,
+    "warning_type": null, // 1 = warning, 2 = record, 3 = ban
+    "warning_user_id": null, // user id
+    "creator_name": "name"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Empty Body" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "can't be blank"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Short" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "is too short (minimum is 5 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Body Too Long" %}
+```javascript
+{
+    "errors": {
+        "body": [
+            "is too long (maximum is 1000 characters)"
+        ]
+    }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Account Too New" %}
+```javascript
+{
+    "errors": {
+        "base": [
+            "User can not yet perform this action. Account is too new."
+        ]
+    }
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
 {% swagger method="post" path="/blips/:id/warning.json" baseUrl="https://e621.net" summary="Add A Warning To A Blip" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
@@ -120,20 +201,20 @@ This operation is idempotent
 The ID of the blip to add a warning to.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="record_type" type="String" required="true" %}
-The type of warning to add to the blip. One of: 
+{% swagger-parameter in="body" name="record_type" type="String" required="false" %}
+The type of warning to add to the blip. One of:
 
 `warning`
 
-, 
+,
 
 `record`
 
-, 
+,
 
 `ban`
 
-, 
+,
 
 `unmark`
 
@@ -244,87 +325,6 @@ The ID of the blip to unhide.
 {
     "success": false,
     "reason": "Access Denied"
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% swagger method="post" path="/blips.json" baseUrl="https://e621.net" summary="Create A Blip" %}
-{% swagger-description %}
-<mark style="color:blue;">Authorization Required</mark>
-
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
-{% endswagger-description %}
-
-{% swagger-parameter in="body" name="blip[body]" type="String" required="true" %}
-The body of the blip.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="blip[response_to]" type="Number" required="false" %}
-The ID of the blip to respond to.
-{% endswagger-parameter %}
-
-{% swagger-response status="201: Created" description="Success" %}
-```javascript
-{
-    "id": 0,
-    "creator_id": 0,
-    "body": "body",
-    "response_to": null, // blip id
-    "created_at": "00-00-00T00:00:00.000-00:00",
-    "updated_at": "00-00-00T00:00:00.000-00:00",
-    "is_hidden": false,
-    "warning_type": null, // 1 = warning, 2 = record, 3 = ban
-    "warning_user_id": null, // user id
-    "creator_name": "name"
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Empty Body" %}
-```javascript
-{
-    "errors": {
-        "body": [
-            "can't be blank"
-        ]
-    }
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Body Too Short" %}
-```javascript
-{
-    "errors": {
-        "body": [
-            "is too short (minimum is 5 characters)"
-        ]
-    }
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Body Too Long" %}
-```javascript
-{
-    "errors": {
-        "body": [
-            "is too long (maximum is 1000 characters)"
-        ]
-    }
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Account Too New" %}
-```javascript
-{
-    "errors": {
-        "base": [
-            "User can not yet perform this action. Account is too new."
-        ]
-    }
 }
 ```
 {% endswagger-response %}
