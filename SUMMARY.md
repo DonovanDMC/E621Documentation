@@ -1,7 +1,9 @@
 # Table of contents
 
 * [Home](README.md)
-* [Common Errors](<README (1).md>)
+* [Common](readme-1/README.md)
+  * [Errors](readme-1/errors.md)
+  * [Search Parameters](readme-1/search-parameters.md)
 * [Admin](admin.md)
 * [Artists](artists/README.md)
   * [Artist Versions](artists/artist-versions.md)
@@ -11,4 +13,5 @@
   * [Forum Categories](forums/forum-categories.md)
   * [Forum Topics](forums/forum-topics.md)
   * [Forum Posts](forums/forum-posts.md)
+* [Pools](pools.md)
 * [Notes](notes.md)
