@@ -30,11 +30,19 @@ The tags of the post the note is on.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="limit" type="Number" %}
-The maximum number of notes to return. Between 20 and 320.
+See 
+
+[Search Parameters: limit](readme-1/search-parameters.md#limit)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="page" type="String" %}
-The page of results to get. Numbered pages are limited to 750. Use a & b prefixes with a note id for after and before respectively.
+See 
+
+[Search Parameters: page](readme-1/search-parameters.md#page)
+
+
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Success (Results)" %}

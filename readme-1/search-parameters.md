@@ -42,3 +42,11 @@ Most search endpoints accept both `search[created_at]` & `search[updated_at]`. T
 
 </details>
 
+<details>
+
+<summary>search[*_name] &#x26; search[*_id]</summary>
+
+Most endpoints that accept a `*_name` (e.g. `creator_name`), or `*_id` (e.g. `updater_id`) parameter typically accept the other as another parameter.
+
+</details>
+

@@ -42,11 +42,19 @@ The order of the returned results. One of:
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" required="false" %}
-The maximum number of forum topics to return. Between 20 and 320
+See 
+
+[Search Parameters: limit](../readme-1/search-parameters.md#limit)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="page" type="Number" required="false" %}
-The page of results to get. Numbered pages are limited to 750. Use a & b prefixes with a forum topic id for after and before respectively.
+See 
+
+[Search Parameters: page](../readme-1/search-parameters.md#page)
+
+
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Success (Results)" %}

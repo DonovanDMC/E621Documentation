@@ -38,10 +38,18 @@
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" %}
-The maximum number of pools to return. Between 20 and 320
+See 
+
+[Search Parameters: limit](readme-1/search-parameters.md#limit)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="page" %}
-The page of results to get. Numbered pages are limited to 750. Use a & b prefixes with a pool id for after and before respectively.
+See 
+
+[Search Parameters: page](readme-1/search-parameters.md#page)
+
+
 {% endswagger-parameter %}
 {% endswagger %}

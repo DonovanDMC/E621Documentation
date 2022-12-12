@@ -52,11 +52,19 @@ If the artist is linked to a user.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" %}
-The maximum number of artists to return. Between 20 and 320
+See 
+
+[Search Parameters: limit](../readme-1/search-parameters.md#limit)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="page" type="String" %}
-The page of results to get. Numbered pages are limited to 750. Use a & b prefixes with an artist id for after and before respectively.
+See 
+
+[Search Parameters: page](../readme-1/search-parameters.md#page)
+
+
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Success (Results)" %}
