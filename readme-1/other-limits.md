@@ -48,11 +48,11 @@
 
 ### Change Limits
 
-|         Name         |               Cut Off               |                    Bypass                    |
-| :------------------: | :---------------------------------: | :------------------------------------------: |
-| Pool Category Change |               30 Posts              |   <mark style="color:red;">Janitor+</mark>   |
-|  Tag Category Change |              100 Posts              | <mark style="color:green;">Moderator+</mark> |
-|    Numbered Pages    | [750\*](search-parameters.md#limit) |                     None                     |
+|         Name         |               Cut Off              |                    Bypass                    |
+| :------------------: | :--------------------------------: | :------------------------------------------: |
+| Pool Category Change |              30 Posts              |   <mark style="color:red;">Janitor+</mark>   |
+|  Tag Category Change |              100 Posts             | <mark style="color:green;">Moderator+</mark> |
+|    Numbered Pages    | [750\*](search-parameters.md#page) |                     None                     |
 
 ### Miscellaneous Limits
 
