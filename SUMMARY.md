@@ -4,6 +4,8 @@
 * [Common](readme-1/README.md)
   * [Errors](readme-1/errors.md)
   * [Search Parameters](readme-1/search-parameters.md)
+  * [Random Notes](readme-1/random-notes.md)
+  * [Throttles](readme-1/throttles.md)
 * [Admin](admin.md)
 * [Artists](artists/README.md)
   * [Artist Versions](artists/artist-versions.md)

@@ -9,6 +9,14 @@ Search options only work when
 .
 {% endswagger-description %}
 
+{% swagger-parameter in="query" name="search[id]" type="Number" %}
+See 
+
+[Search Parameters: search\[id\]](readme-1/search-parameters.md#search-id)
+
+
+{% endswagger-parameter %}
+
 {% swagger-parameter in="query" name="group_by" type="String" required="false" %}
 The grouping of the returned results. On of 
 
@@ -43,10 +51,6 @@ The name of the creator of the comment.
 
 {% swagger-parameter in="query" name="search[creator_id]" type="Number" %}
 The ID of the creator of the comment.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="search[id]" type="Number" %}
-The ID of the comment.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[is_hidden]" type="Boolean" %}
@@ -436,6 +440,8 @@ Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 
 
 {% swagger-parameter in="body" name="comment[body]" type="String" required="true" %}
 The body of the comment.
+
+Min: 1 / Max: 10,000
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="comment[post_id]" required="true" type="Number" %}
@@ -569,6 +575,8 @@ This operation is idempotent
 
 {% swagger-parameter in="body" name="comment[body]" type="String" %}
 The new body of the comment.
+
+Min: 1 / Max: 10,000
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
