@@ -6,6 +6,7 @@
   * [Search Parameters](readme-1/search-parameters.md)
   * [Random Notes](readme-1/random-notes.md)
   * [Throttles](readme-1/throttles.md)
+  * [Other Limits](readme-1/other-limits.md)
 * [Admin](admin.md)
 * [Artists](artists/README.md)
   * [Artist Versions](artists/artist-versions.md)

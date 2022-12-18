@@ -5,14 +5,6 @@
 
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="search[id]" type="String" %}
-See 
-
-[Search Parameters: search\[id\]](readme-1/search-parameters.md#search-id)
-
-
-{% endswagger-parameter %}
-
 {% swagger-parameter in="body" name="search[is_active]" type="Boolean" %}
 If the note is active.
 {% endswagger-parameter %}
@@ -86,7 +78,7 @@ See
 
 {% swagger method="get" path="/notes/:id.json" baseUrl="https://e621.net" summary="Get A Note" %}
 {% swagger-description %}
-Visiting /notes/:id in html form will redirect to /posts/:postID/
+
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" %}

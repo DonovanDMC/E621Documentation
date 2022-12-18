@@ -8,11 +8,7 @@ E621 does not provide a form to search topics, so the information here may be in
 {% endswagger-description %}
 
 {% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
-See 
-
-[Search Parameters: search\[id\]](../readme-1/search-parameters.md#search-id)
-
-
+The ID of the forum topic to search for.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[title_matches]" type="String" required="false" %}
@@ -92,10 +88,6 @@ See
 {% swagger-description %}
 Some topics may be in specific categories that require certain user levels.
 {% endswagger-description %}
-
-{% swagger-parameter in="path" name="id" type="Number" required="true" %}
-The ID of the forum topic to get.
-{% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Success" %}
 ```javascript

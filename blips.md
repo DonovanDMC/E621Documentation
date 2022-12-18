@@ -5,14 +5,6 @@
 
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="search[id]" type="String" %}
-See 
-
-[Search Parameters: search\[id\]](readme-1/search-parameters.md#search-id)
-
-
-{% endswagger-parameter %}
-
 {% swagger-parameter in="query" name="search[creator_name]" required="false" %}
 Search by the name of the creator of the blip.
 {% endswagger-parameter %}

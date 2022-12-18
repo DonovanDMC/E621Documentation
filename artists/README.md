@@ -6,11 +6,7 @@
 {% endswagger-description %}
 
 {% swagger-parameter in="query" name="search[id]" type="Number" %}
-See 
-
-[Search Parameters: search\[id\]](../readme-1/search-parameters.md#search-id)
-
-
+The ID of a specific artist to search for.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[is_active]" type="Boolean" %}
@@ -336,6 +332,10 @@ The ID of the artist.
 
 {% swagger-parameter in="body" name="artist[is_active]" type="Boolean" %}
 If the artist is active. Requires janitor or higher.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="header" name="Authorization" type="Basic" %}
+The authorization for the request, in the basic format.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" type="String" name="artist[group_name]" %}
