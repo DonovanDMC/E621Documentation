@@ -48,22 +48,22 @@
 
 ### Change Limits
 
-|         Name         |               Cut Off              |                    Bypass                    |
-| :------------------: | :--------------------------------: | :------------------------------------------: |
-| Pool Category Change |              30 Posts              |   <mark style="color:red;">Janitor+</mark>   |
-|  Tag Category Change |              100 Posts             | <mark style="color:green;">Moderator+</mark> |
-|    Numbered Pages    | [750\*](search-parameters.md#page) |                     None                     |
+|         Name         |  Cut Off  |                    Bypass                    |
+| :------------------: | :-------: | :------------------------------------------: |
+| Pool Category Change |  30 Posts |   <mark style="color:red;">Janitor+</mark>   |
+|  Tag Category Change | 100 Posts | <mark style="color:green;">Moderator+</mark> |
 
 ### Miscellaneous Limits
 
-|         Name         |     Limit     |
-| :------------------: | :-----------: |
-|     Tags In Query    |       40      |
-| API Regen Multiplier |       1       |
-|       File Size      | 100 Megabytes |
-|    Video Duration    |  3600 Seconds |
-|   Image Resolution   |  15000x15000  |
-|   Mascot Resolution  |   1000x1000   |
+|         Name         |                Limit               |
+| :------------------: | :--------------------------------: |
+|     Tags In Query    |                 40                 |
+|    Numbered Pages    | [750\*](search-parameters.md#page) |
+| API Regen Multiplier |                  1                 |
+|       File Size      |            100 Megabytes           |
+|    Video Duration    |            3600 Seconds            |
+|   Image Resolution   |             15000x15000            |
+|   Mascot Resolution  |              1000x1000             |
 
 ### File Size Limits
 
