@@ -6,7 +6,11 @@
 {% endswagger-description %}
 
 {% swagger-parameter in="query" name="search[id]" type="Number" %}
-The ID of a specific artist to search for.
+See 
+
+[Search Parameters: search\[id\]](../readme-1/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[is_active]" type="Boolean" %}
@@ -15,6 +19,10 @@ If the artist is active.
 
 {% swagger-parameter in="query" name="search[creator_name]" type="String" %}
 The name of the creator of the artist.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[creator_id]" type="Number" %}
+The id of the creator of the artist.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[has_tag]" type="Boolean" %}
@@ -48,7 +56,15 @@ Search by url matches.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[is_linked]" type="Boolean" %}
-If the artist is linked to a user.
+If the artist is linked to a user. Note: this only works when set to 
+
+`1`
+
+ or 
+
+`0`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" %}
@@ -332,10 +348,6 @@ The ID of the artist.
 
 {% swagger-parameter in="body" name="artist[is_active]" type="Boolean" %}
 If the artist is active. Requires janitor or higher.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="header" name="Authorization" type="Basic" %}
-The authorization for the request, in the basic format.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" type="String" name="artist[group_name]" %}
