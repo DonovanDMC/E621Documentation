@@ -5,12 +5,16 @@
 
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="search[topic_title_matches]" type="String" required="false" %}
-The title of the topic the forum post is under.
+{% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
+See 
+
+[Search Parameters: search\[id\]](../readme-1/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
-The ID of the forum post.
+{% swagger-parameter in="query" name="search[topic_title_matches]" type="String" required="false" %}
+The title of the topic the forum post is under.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[body_matches]" type="String" required="false" %}
@@ -285,7 +289,7 @@ The ID of the forum post to unhide.
 Some topics may be in specific categories that require certain user levels.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="forum_post[topic_id]" type="Number" %}
+{% swagger-parameter in="body" name="forum_post[topic_id]" type="Number" required="true" %}
 The ID of the forum topic this forum post should be in.
 {% endswagger-parameter %}
 
