@@ -1,12 +1,12 @@
 # Table of contents
 
 * [Home](README.md)
-* [Common](readme-1/README.md)
-  * [Errors](readme-1/errors.md)
-  * [Search Parameters](readme-1/search-parameters.md)
-  * [Random Notes](readme-1/random-notes.md)
-  * [Throttles](readme-1/throttles.md)
-  * [Other Limits](readme-1/other-limits.md)
+* [Common](common/README.md)
+  * [Errors](common/errors.md)
+  * [Search Parameters](common/search-parameters.md)
+  * [Random Notes](common/random-notes.md)
+  * [Throttles](common/throttles.md)
+  * [Other Limits](common/other-limits.md)
 * [Admin](admin.md)
 * [Artists](artists/README.md)
   * [Artist Versions](artists/artist-versions.md)
