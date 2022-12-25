@@ -43,7 +43,8 @@ The sorting order of this category.
 
 {% swagger-response status="302: Found" description="General Response" %}
 <pre class="language-html"><code class="lang-html"><strong>&#x3C;!-- This will be returned regardless if a topic was actually created (unless the controller or database returns an error) -->
-</strong><strong>&#x3C;html>&#x3C;body>You are being &#x3C;a href="https://e621.net/forum_categories">redirected&#x3C;/a>.&#x3C;/body>&#x3C;/html></strong></code></pre>
+</strong><strong>&#x3C;html>&#x3C;body>You are being &#x3C;a href="https://e621.net/forum_categories">redirected&#x3C;/a>.&#x3C;/body>&#x3C;/html>
+</strong></code></pre>
 {% endswagger-response %}
 
 {% swagger-response status="400: Bad Request" description="Missing Or Invalid Name" %}
@@ -85,11 +86,11 @@ The sorting order of this category.
 Due to this being admin only and typically ui based, there are no standard responses for errors or otherwise.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="id" type="Number" %}
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
 The ID of the forum category to edit.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="forum_category[name]" type="String" required="true" %}
+{% swagger-parameter in="body" name="forum_category[name]" type="String" required="false" %}
 The name of the category.
 {% endswagger-parameter %}
 
@@ -148,7 +149,7 @@ The sorting order of this category.
 As fa as I can tell, there is no way to use this from the ui, so forum categories are not meant to be deleted. They still can be deleted, but it will return an error
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="id" type="Number" %}
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
 The ID of the forum category to delete.
 {% endswagger-parameter %}
 
@@ -174,7 +175,8 @@ The ID of the forum category to delete.
 <pre class="language-javascript"><code class="lang-javascript">// In my testing, this DOES mean the category was deleted,
 // though what state it and other various components are
 // left in is up in the air.
-<strong>// HTML Response</strong></code></pre>
+<strong>// HTML Response
+</strong></code></pre>
 {% endswagger-response %}
 {% endswagger %}
 
