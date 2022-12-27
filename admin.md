@@ -7,6 +7,8 @@
 <mark style="color:green;">Moderator+ Required</mark>
 
 Even if unchanged, `user[level]` MUST be provided, else a 500 Internal Server Error will be returned, along with making a junk mod action entry.
+
+Editing the authenticated user may not work.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
