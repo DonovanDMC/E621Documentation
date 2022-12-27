@@ -87,7 +87,8 @@ If the user has unrestricted uploads.
 </strong><strong>{
 </strong>    "success": false,
     "reason": "Access Denied"
-}</code></pre>
+}
+</code></pre>
 {% endswagger-response %}
 
 {% swagger-response status="500: Internal Server Error" description="Missing Level" %}
@@ -128,6 +129,41 @@ The user's new blacklist.
     "success": false,
     "message": "Validation failed: Blacklisted tags is too long (maximum is 150000 characters)",
     "code": "UUID"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="get" path="/admin/users/alt_list.json" baseUrl="https://e621.net" summary="Get The List Of Alt Accounts" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:green;">Moderator+ Required</mark>
+{% endswagger-description %}
+
+{% swagger-parameter in="query" name="page" type="Number" %}
+The page of results to get. Results are paginated 250 to a page. Min: 1, Max: 9999
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Success" %}
+```javascript
+// u1 is the concerned user, u2 is the alt
+{
+  "u1id": 0,
+  "u1name": "user1",
+  "u2id": 0,
+  "u2name": "user2",
+  "last_ip_addr": "127.0.0.1",
+  "u1email": "user1@e621.local",
+  "u2email": "user2@e621.local",
+  "last_logged_in_at": "0000-00-00T00:00:00.000Z",
+  "created_at": "0000-00-00T00:00:00.000Z",
+  "u2level": 0,
+  "u2flags": 0,
+  "u2activation": null, // email verification key
+  "u1level": 0,
+  "u1flags": 0,
+  "u1activation": null // email verification key
 }
 ```
 {% endswagger-response %}
