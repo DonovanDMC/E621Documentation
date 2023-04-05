@@ -2,31 +2,58 @@
 
 {% swagger method="get" path="/comments.json" baseUrl="https://e621.net" summary="Search Comments" %}
 {% swagger-description %}
-Search options only work when 
+No comment information will be returned in this route. [See Search Comments (Group By Comment)](./#search-comments-group-by-comment). This is for ui use, so it doesn't serve much api use.
 
-`group_by=comment`
+This route does not support the `limit` parameter. The maximum results will always be 5.
 
-.
+This route does not support `search[id]`.
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="group_by" type="String" required="false" %}
-The grouping of the returned results. On of 
-
+{% swagger-parameter in="query" name="group_by" type="String" %}
 `post`
+{% endswagger-parameter %}
 
-, 
+{% swagger-parameter in="query" name="tags" type="String" %}
+The tags of the posts.
+{% endswagger-parameter %}
 
+{% swagger-parameter in="query" name="page" type="Number" %}
+See 
+
+[Search Parameters: page](../common/search-parameters.md#page)
+
+
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Success (Results)" %}
+```java
+{
+  "posts": [
+      // Complete posts, see Posts "Get A Post" for structure
+  ]
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="500: Internal Server Error" description="Success (No Results)" %}
+```javascript
+{
+  "success": false,
+  "message": "An unexpected error occurred.",
+  "code": "00000000-0000-0000-0000-000000000000"
+}
+
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="get" path="/comments.json?group_by=comment" baseUrl="https://e621.net" summary="Search Comments (Group By Comment)" %}
+{% swagger-description %}
+
+{% endswagger-description %}
+
+{% swagger-parameter in="query" name="group_by" type="String" required="true" %}
 `comment`
-
-. To get useful results, use 
-
-`comment`
-
-. The default is 
-
-`post`
-
-.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[body_matches]" type="String" %}
@@ -37,16 +64,16 @@ The body of the comment.
 If the post did not bump. The UI for searching inverts this option.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="query" name="search[post_tags_match]" type="String" %}
+The tags of the post the comments are on.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="query" name="search[creator_name]" type="String" %}
 The name of the creator of the comment.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[creator_id]" type="Number" %}
 The ID of the creator of the comment.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="search[id]" type="Number" %}
-The ID of the comment.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[is_hidden]" type="Boolean" %}
@@ -57,26 +84,32 @@ If the comment is hidden.
 If the comment is sticky (post as moderator).
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[ip_addr]" type="String" %}
-The IP Address of the creator of the comment. Requires Moderator.
-{% endswagger-parameter %}
-
 {% swagger-parameter in="query" name="search[post_id]" type="Number" %}
-The ID of the post the comment was made on.
+The ID of the post the comment was made on. Multiple post ids can be separated by commas.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[poster_id]" type="Number" %}
 The ID of the user that created the post the comment is on.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="query" name="search[ip_addr]" type="String" %}
+The IP Address of the creator of the comment.&#x20;
+
+See [Search Parameters: search\[ip\_addr\]](../common/search-parameters.md#search-ip\_addr)
+{% endswagger-parameter %}
+
 {% swagger-parameter in="query" name="search[order]" type="String" %}
 The order of the returned results. One of: 
 
-`id_desc`
+`post_id`
 
 , 
 
-`updated_at_desc`
+`post_id_desc`
+
+, 
+
+`score`
 
 , 
 
@@ -84,13 +117,25 @@ The order of the returned results. One of:
 
 , 
 
-`post_id_desc`
+`updated_at`
+
+, 
+
+`updated_at_desc`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[id]" type="Number" %}
+See 
+
+[Search Parameters: search\[id\]](../common/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" %}
 See 
 
-[Search Parameters: limit](readme-1/search-parameters.md#limit)
+[Search Parameters: limit](../common/search-parameters.md#limit)
 
 
 {% endswagger-parameter %}
@@ -98,91 +143,12 @@ See
 {% swagger-parameter in="query" name="page" type="String" %}
 See 
 
-[Search Parameters: page](readme-1/search-parameters.md#page)
+[Search Parameters: page](../common/search-parameters.md#page)
 
 
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="Success (Results, `group_by=post`)" %}
-```javascript
-// This is https://e621.net/posts/546281
-// most data has been genericized or truncated
-{
-    "posts": [
-        {
-            "id": 0,
-            "created_at": "0000-00-00T00:00:00.000-00:00",
-            "updated_at": "0000-00-00T00:00:00.000-00:00",
-            "file": {
-                "width": 960,
-                "height": 1280,
-                "ext": "jpg",
-                "size": 190487,
-                "md5": "900e98af5b512ba1a5f8a1a9885c1ef1",
-                "url": "https://static1.e621.net/data/90/0e/900e98af5b512ba1a5f8a1a9885c1ef1.jpg"
-            },
-            "preview": {
-                "width": 112,
-                "height": 150,
-                "url": "https://static1.e621.net/data/preview/90/0e/900e98af5b512ba1a5f8a1a9885c1ef1.jpg"
-            },
-            "sample": {
-                "has": true,
-                "height": 1133,
-                "width": 850,
-                "url": "https://static1.e621.net/data/sample/90/0e/900e98af5b512ba1a5f8a1a9885c1ef1.jpg",
-                "alternates": {}
-            },
-            "score": {
-                "up": 1424,
-                "down": -29,
-                "total": 1399
-            },
-            "tags": {
-                "general": [],
-                "species": [],
-                "character": [],
-                "copyright": [ ],
-                "artist": [],
-                "invalid": [],
-                "lore": [],
-                "meta": []
-            },
-            "locked_tags": [],
-            "change_seq": 0,
-            "flags": {
-                "pending": false,
-                "flagged": false,
-                "note_locked": false,
-                "status_locked": false,
-                "rating_locked": false,
-                "comment_disabled": false,
-                "deleted": false
-            },
-            "rating": "s",
-            "fav_count": 0,
-            "sources": [],
-            "pools": [],
-            "relationships": {
-                "parent_id": null,
-                "has_children": true,
-                "has_active_children": false,
-                "children": []
-            },
-            "approver_id": 0,
-            "uploader_id": 0,
-            "description": "",
-            "comment_count": 0,
-            "is_favorited": false,
-            "has_notes": false,
-            "duration": null
-        }
-    ]
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="200: OK" description="Success (Results, `group_by=comment`)" %}
+{% swagger-response status="200: OK" description="Success (Results)" %}
 ```javascript
 [
     {
@@ -206,17 +172,7 @@ See
 ```
 {% endswagger-response %}
 
-{% swagger-response status="500: Internal Server Error" description="Error (No Results, `group_by=post`)" %}
-```javascript
-{
-    "success": false,
-    "message": "An unexpected error occurred.",
-    "code": ""
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="200: OK" description="Success (No Results, `group_by=comment`)" %}
+{% swagger-response status="200: OK" description="Success (No Results)" %}
 ```javascript
 {
     "comments": []
@@ -331,7 +287,7 @@ The type of warning to add to the comment. One of:
 {
     "success": false,
     "message": "'TYPE' is not a valid warning_type",
-    "code": "UUID"
+    "code": "00000000-0000-0000-0000-000000000000"
 }
 ```
 {% endswagger-response %}
@@ -436,6 +392,8 @@ Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 
 
 {% swagger-parameter in="body" name="comment[body]" type="String" required="true" %}
 The body of the comment.
+
+Min: 1 / Max: 10,000
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="comment[post_id]" required="true" type="Number" %}
@@ -554,7 +512,7 @@ If the comment should be stuck to the top of the comment section (post as modera
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="patch" path="/comments/:id.json" baseUrl="https://e621.net" summary="Modify A Comment" %}
+{% swagger method="patch" path="/comments/:id.json" baseUrl="https://e621.net" summary="Edit A Comment" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
@@ -569,6 +527,8 @@ This operation is idempotent
 
 {% swagger-parameter in="body" name="comment[body]" type="String" %}
 The new body of the comment.
+
+Min: 1 / Max: 10,000
 {% endswagger-parameter %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}

@@ -5,8 +5,20 @@
 
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="search[id]" type="Number" %}
-The ID of a specific artist to search for.
+{% swagger-parameter in="query" name="search[any_other_name_like]" %}
+Any name being similar.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[any_name_matches]" %}
+Any name matching.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[any_name_or_url_matches]" %}
+Any name or url matching.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[url_matches]" %}
+Any url matching.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[is_active]" type="Boolean" %}
@@ -17,20 +29,28 @@ If the artist is active.
 The name of the creator of the artist.
 {% endswagger-parameter %}
 
+{% swagger-parameter in="query" name="search[creator_id]" type="Number" %}
+The ID of the creator of the artist.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="query" name="search[has_tag]" type="Boolean" %}
 If the artist has a tag.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[any_name_matches]" type="String" %}
-Search by name matches.
+{% swagger-parameter in="query" name="search[is_linked]" type="Boolean" %}
+If the artist is linked to a user. Note: this only works when set to 
+
+`1`
+
+ or 
+
+`0`
+
+.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[order]" type="String" %}
 The order of returned search results. One of: 
-
-`created_at`
-
-, 
 
 `updated_at`
 
@@ -43,18 +63,18 @@ The order of returned search results. One of:
 `post_count`
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[url_matches]" type="String" %}
-Search by url matches.
-{% endswagger-parameter %}
+{% swagger-parameter in="query" name="search[id]" type="Number" %}
+See 
 
-{% swagger-parameter in="query" name="search[is_linked]" type="Boolean" %}
-If the artist is linked to a user.
+[Search Parameters: search\[id\]](../common/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" %}
 See 
 
-[Search Parameters: limit](../readme-1/search-parameters.md#limit)
+[Search Parameters: limit](../common/search-parameters.md#limit)
 
 
 {% endswagger-parameter %}
@@ -62,7 +82,7 @@ See
 {% swagger-parameter in="query" name="page" type="String" %}
 See 
 
-[Search Parameters: page](../readme-1/search-parameters.md#page)
+[Search Parameters: page](../common/search-parameters.md#page)
 
 
 {% endswagger-parameter %}
@@ -188,7 +208,9 @@ individual `other_names` entries are silently truncated to 100 characters&#x20;
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="artist[is_active]" type="Boolean" %}
-If the artist is active. Requires janitor or higher.
+If the artist is active.&#x20;
+
+<mark style="color:red;">Janitor+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="artist[group_name]" required="false" type="String" %}
@@ -200,7 +222,9 @@ The id of the user to link with the artist. A user can be linked to multiple art
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="artist[is_locked]" type="Boolean" %}
-If the artist should be locked. Requires janitor or higher.
+If the artist should be locked.&#x20;
+
+<mark style="color:red;">Janitor+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="artist[name]" required="true" type="String" %}
@@ -311,7 +335,59 @@ The urls associated with the artist.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="patch" path="/artists/:id.json" baseUrl="https://e621.net" summary="Modify An Artist" %}
+{% swagger method="delete" path="/artists/:id.json" baseUrl="https://e621.net" summary="Delete An Artist" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:red;">Janitor+ Required</mark>
+
+This operation is idempotent.
+
+Deleting an artist does not actually delete the artist, it sets `is_active` to false.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the artist to delete.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Success" %}
+```javascript
+// HTML Page
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Artist Not Found" %}
+```javascript
+{
+    "success": false,
+    "reason": "not found"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Account Too New" %}
+```javascript
+{
+    "errors": {
+        "base": [
+            "User can not yet perform this action. Account is too new."
+        ]
+    }
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="patch" path="/artists/:id.json" baseUrl="https://e621.net" summary="Edit An Artist" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
@@ -332,10 +408,6 @@ The ID of the artist.
 
 {% swagger-parameter in="body" name="artist[is_active]" type="Boolean" %}
 If the artist is active. Requires janitor or higher.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="header" name="Authorization" type="Basic" %}
-The authorization for the request, in the basic format.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" type="String" name="artist[group_name]" %}
@@ -450,58 +522,6 @@ The urls associated with the artist.
     "errors": {
         "urls.url": [
             "is too long (maximum is 4096 characters)"
-        ]
-    }
-}
-```
-{% endswagger-response %}
-{% endswagger %}
-
-{% swagger method="delete" path="/artists/:id.json" baseUrl="https://e621.net" summary="Delete An Artist" %}
-{% swagger-description %}
-<mark style="color:blue;">Authorization Required</mark>
-
-<mark style="color:red;">Janitor+ Required</mark>
-
-This operation is idempotent
-
-Deleting an artist does not actually delete the artist, it sets `is_active` to false
-{% endswagger-description %}
-
-{% swagger-parameter in="path" name="id" type="Number" required="true" %}
-The ID of the artist to delete.
-{% endswagger-parameter %}
-
-{% swagger-response status="200: OK" description="Success" %}
-```javascript
-// HTML Page
-```
-{% endswagger-response %}
-
-{% swagger-response status="403: Forbidden" description="Access Denied" %}
-```javascript
-{
-    "success": false,
-    "reason": "Access Denied"
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="404: Not Found" description="Artist Not Found" %}
-```javascript
-{
-    "success": false,
-    "reason": "not found"
-}
-```
-{% endswagger-response %}
-
-{% swagger-response status="422: Unprocessable Entity" description="Account Too New" %}
-```javascript
-{
-    "errors": {
-        "base": [
-            "User can not yet perform this action. Account is too new."
         ]
     }
 }

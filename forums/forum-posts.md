@@ -5,12 +5,16 @@
 
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="search[topic_title_matches]" type="String" required="false" %}
-The title of the topic the forum post is under.
+{% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
+See 
+
+[Search Parameters: search\[id\]](../common/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
-The ID of the forum post.
+{% swagger-parameter in="query" name="search[topic_title_matches]" type="String" required="false" %}
+The title of the topic the forum post is under.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[body_matches]" type="String" required="false" %}
@@ -32,7 +36,7 @@ The ID of the category the forum post is under
 {% swagger-parameter in="query" name="limit" type="Number" required="false" %}
 See 
 
-[Search Parameters: limit](../readme-1/search-parameters.md#limit)
+[Search Parameters: limit](../common/search-parameters.md#limit)
 
 
 {% endswagger-parameter %}
@@ -40,7 +44,7 @@ See
 {% swagger-parameter in="query" name="page" type="Number" required="false" %}
 See 
 
-[Search Parameters: page](../readme-1/search-parameters.md#page)
+[Search Parameters: page](../common/search-parameters.md#page)
 
 
 {% endswagger-parameter %}
@@ -174,7 +178,7 @@ The type of warning to add to the forum post. One of:
 {
     "success": false,
     "message": "'TYPE' is not a valid warning_type",
-    "code": "UUID"
+    "code": "00000000-0000-0000-0000-000000000000"
 }
 ```
 {% endswagger-response %}
@@ -285,7 +289,7 @@ The ID of the forum post to unhide.
 Some topics may be in specific categories that require certain user levels.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="forum_post[topic_id]" type="Number" %}
+{% swagger-parameter in="body" name="forum_post[topic_id]" type="Number" required="true" %}
 The ID of the forum topic this forum post should be in.
 {% endswagger-parameter %}
 

@@ -1,34 +1,60 @@
 # Artist Versions
 
+A route like /artist\_versions/:id.json does not exist. Use the search route with `search[id]` instead.
+
 {% swagger method="get" path="/artist_versions.json" baseUrl="https://e621.net" summary="Search Artist Versions" %}
 {% swagger-description %}
+<mark style="color:blue;">
 
+Authorization Required
+
+</mark>
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="search[id]" type="Number" %}
-The ID of the specific artist version to get.
-{% endswagger-parameter %}
-
 {% swagger-parameter in="query" name="search[name]" type="String" %}
-Search by the name of the artist.
+The name of the artist.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[artist_id]" type="Number" %}
-Search by the id of the artist.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="query" name="search[updater]" type="String" %}
-Search by the name of the updater.
+{% swagger-parameter in="query" name="search[updater_name]" type="String" %}
+The name of the updater.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[updater_id]" type="Number" %}
-Search by the id of the updater.
+The ID of the updater.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[artist_id]" type="Number" %}
+The ID of the artist.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[is_active]" type="Boolean" %}
+If the artist is active.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[order]" type="String" %}
+The order of the returned results. One of: 
+
+`name`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[ip_addr]" type="String" %}
+The ip address of the updater.&#x20;
+
+See [Search Parameters: search\[ip\_addr\]](../common/search-parameters.md#search-ip\_addr)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[id]" type="Number" %}
+See 
+
+[Search Parameters: search\[id\]](../common/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" %}
 See 
 
-[Search Parameters: limit](../readme-1/search-parameters.md#limit)
+[Search Parameters: limit](../common/search-parameters.md#limit)
 
 
 {% endswagger-parameter %}
@@ -36,7 +62,7 @@ See
 {% swagger-parameter in="query" name="page" type="String" %}
 See 
 
-[Search Parameters: page](../readme-1/search-parameters.md#page)
+[Search Parameters: page](../common/search-parameters.md#page)
 
 
 {% endswagger-parameter %}
@@ -75,5 +101,3 @@ See
 ```
 {% endswagger-response %}
 {% endswagger %}
-
-A route like /artist\_versions/:id.json does not exist. Use the search route with `search[id]` instead.

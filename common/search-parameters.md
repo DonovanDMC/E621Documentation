@@ -50,3 +50,15 @@ Most endpoints that accept a `*_name` (e.g. `creator_name`), or `*_id` (e.g. `up
 
 </details>
 
+<details>
+
+<summary>search[ip_addr]</summary>
+
+<mark style="color:blue;">Authentication Required</mark>
+
+<mark style="color:yellow;">Admin+ Required</mark>
+
+The ip address of a user relating to the content. Typically creator or updater. See [postgres' documentation](https://www.postgresql.org/docs/9.3/functions-net.html) for information on how this is parsed. Specifically, "is contained within or equals" (`<<=`)
+
+</details>
+

@@ -5,40 +5,52 @@
 
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="search[creator_name]" required="false" %}
+{% swagger-parameter in="query" name="search[creator_name]" required="false" type="String" %}
 Search by the name of the creator of the blip.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[creator_id]" required="false" %}
+{% swagger-parameter in="query" name="search[creator_id]" required="false" type="String" %}
 Search by the id of the creator of the blip.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[body_matches]" required="false" %}
+{% swagger-parameter in="query" name="search[body_matches]" required="false" type="String" %}
 Search by the body of the blip.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[response_to]" required="false" %}
+{% swagger-parameter in="query" name="search[response_to]" required="false" type="Number" %}
 Search by the blip the blip is responding to.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="query" name="search[ip_addr]" required="false" %}
-Search by the ip address of the creator. Requires Moderator.
+{% swagger-parameter in="query" name="search[ip_addr]" required="false" type="String" %}
+Search by the ip address of the creator.&#x20;
+
+See [Search Parameters: search\[ip\_addr\]](common/search-parameters.md#search-ip\_addr)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[order]" type="String" required="false" %}
-The order of returned results. One of:
+The order of returned results. One of: 
 
-`id_desc`
+`updated_at`
 
-,
+, 
 
 `updated_at_desc`
+
+ (alias)
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[id]" type="String" %}
+See 
+
+[Search Parameters: search\[id\]](common/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" required="false" %}
 See 
 
-[Search Parameters: limit](readme-1/search-parameters.md#limit)
+[Search Parameters: limit](common/search-parameters.md#limit)
 
 
 {% endswagger-parameter %}
@@ -46,7 +58,7 @@ See
 {% swagger-parameter in="query" name="page" required="false" %}
 See 
 
-[Search Parameters: page](readme-1/search-parameters.md#page)
+[Search Parameters: page](common/search-parameters.md#page)
 
 
 {% endswagger-parameter %}
@@ -119,7 +131,7 @@ The ID of the blip.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 
 This operation is idempotent
 {% endswagger-description %}
@@ -171,7 +183,7 @@ The type of warning to add to the blip. One of:
 {
     "success": false,
     "message": "'TYPE' is not a valid warning_type",
-    "code": "UUID"
+    "code": "00000000-0000-0000-0000-000000000000"
 }
 ```
 {% endswagger-response %}
@@ -181,7 +193,7 @@ The type of warning to add to the blip. One of:
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+Required</mark> if the blip is not yours
+<mark style="color:red;">Moderator+Required</mark> if the blip is not yours
 
 This operation is idempotent
 {% endswagger-description %}
@@ -221,7 +233,7 @@ The ID of the blip to hide.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark> regardless
+<mark style="color:red;">Moderator+ Required</mark> regardless
 
 This operation is idempotent
 {% endswagger-description %}
@@ -342,7 +354,9 @@ The ID of the blip to respond to.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark> if the blip is not yours, or is older than 5 minutes
+<mark style="color:red;">Moderator+ Required</mark> if the blip is not yours
+
+<mark style="color:yellow;">Admin+ Required</mark> if the blip is older than 5 minutes
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -414,7 +428,7 @@ The new body of the blip.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:yellow;">Admin+ Required</mark>
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
