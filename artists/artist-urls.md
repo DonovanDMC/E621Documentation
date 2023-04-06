@@ -109,34 +109,3 @@ See
 ```
 {% endswagger-response %}
 {% endswagger %}
-
-{% swagger method="patch" path="/artist_urls/:id.json" baseUrl="https://e621.net" summary="Edit An Artist URL" %}
-{% swagger-description %}
-<mark style="color:blue;">Authorization Required</mark>
-
-This operation is idempotent.
-{% endswagger-description %}
-
-{% swagger-parameter in="path" name="id" type="Number" required="true" %}
-The ID of the artist url to edit.
-{% endswagger-parameter %}
-
-{% swagger-parameter in="body" name="artist_url[is_active]" type="Boolean" %}
-If the artist url is active or not.
-{% endswagger-parameter %}
-
-{% swagger-response status="204: No Content" description="Success" %}
-
-{% endswagger-response %}
-
-{% swagger-response status="404: Not Found" description="Not Found" %}
-```javascript
-{
-    "success": false,
-    "reason": "not found"
-}
-```
-
-
-{% endswagger-response %}
-{% endswagger %}
