@@ -14,6 +14,7 @@
 * [Blips](blips.md)
 * [Comments](comments/README.md)
   * [Comment Votes](comments/comment-votes.md)
+* [Favorites](favorites.md)
 * [Forums](forums/README.md)
   * [Forum Categories](forums/forum-categories.md)
   * [Forum Topics](forums/forum-topics.md)
