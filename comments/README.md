@@ -722,7 +722,11 @@ If an unvote should not be allowed. Note: This MUST be the exact string "true" t
 
 {% swagger method="delete" path="/comments/:id/votes.json" baseUrl="https://e621.net" summary="Remove A Comment Vote" %}
 {% swagger-description %}
+The only vote removed will be the currently authenticated user's vote.
 
+<mark style="color:blue;">Requires Authentication</mark>
+
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
