@@ -550,6 +550,15 @@ The vote to add to the post.
 }
 ```
 {% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Cannot Vote On Own Post" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied: You cannot vote on your own requests"
+}
+```
+{% endswagger-response %}
 {% endswagger %}
 
 {% swagger method="delete" path="/forum_posts/:id/votes.json" baseUrl="https://e621.net" summary="Delete Forum Post Vote" %}
