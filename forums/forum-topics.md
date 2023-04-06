@@ -1,5 +1,7 @@
 # Forum Topics
 
+An alias for `/forum_topics` exists: `/ftopics`
+
 {% swagger method="get" path="/forum_topics.json" baseUrl="https://e621.net" summary="Search Forum Topics" %}
 {% swagger-description %}
 Some topics may be in specific categories that require certain user levels.

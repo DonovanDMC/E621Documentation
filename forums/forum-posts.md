@@ -1,5 +1,7 @@
 # Forum Posts
 
+An alias for `/forum_posts` exists: `/fposts`
+
 {% swagger method="get" path="/forum_posts.json" baseUrl="https://e621.net" summary="Search Forum Posts" %}
 {% swagger-description %}
 
@@ -472,6 +474,113 @@ The ID of the forum post to delete.
 {% endswagger-response %}
 
 {% swagger-response status="404: Not Found" description="Not Found" %}
+```javascript
+{
+    "success": false,
+    "reason": "not found"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="post" path="/forum_posts/:id/votes.json" baseUrl="https://e621.net" summary="Create Forum Post Vote" %}
+{% swagger-description %}
+<mark style="color:blue;">Authentication Required</mark>
+
+Votes can only be added to posts which are the OP of an alias request, implication request, or bulk update request.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the forum post to vote on.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="forum_post_vote[score]" type="Number" %}
+The vote to add to the post. 
+
+`1`
+
+ for up, 
+
+`0`
+
+ for meh, and 
+
+`-1`
+
+ for down.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Success" %}
+```javascript
+{
+    "id": 0,
+    "forum_post_id": 0,
+    "creator_id": 0,
+    "score": 0, // 1, -1
+    "created_at": "0000-00-00T00:00:00.000-00:00",
+    "updated_at": "0000-00-00T00:00:00.000-00:00",
+    "creator_name": "test"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Vote Already Taken" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied: Your vote has already been taken"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Cannot Vote On Post" %}
+<pre class="language-javascript"><code class="lang-javascript"><strong>// Post is not an alias request, implication request, or bulk update request OP
+</strong><strong>{
+</strong>    "success": false,
+    "reason": "Access Denied"
+}
+</code></pre>
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Invalid Score" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied: Score is not included in the list"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="delete" path="/forum_posts/:id/votes.json" baseUrl="https://e621.net" summary="Delete Forum Post Vote" %}
+{% swagger-description %}
+<mark style="color:blue;">
+
+Authorization Required
+
+</mark>
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the forum post remove a vote from.
+{% endswagger-parameter %}
+
+{% swagger-response status="200: OK" description="Success" %}
+```javascript
+{}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Cannot Vote On Post" %}
+```javascript
+{
+    "success": false,
+    "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Vote Does Not Exist" %}
 ```javascript
 {
     "success": false,
