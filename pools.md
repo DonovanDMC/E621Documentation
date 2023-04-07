@@ -5,14 +5,6 @@
 
 {% endswagger-description %}
 
-{% swagger-parameter in="query" name="search[id]" type="String" %}
-See 
-
-[Search Parameters: search\[id\]](common/search-parameters.md#search-id)
-
-
-{% endswagger-parameter %}
-
 {% swagger-parameter in="query" name="search[name_matches]" type="String" %}
 Fuzzy matching for the name of pools.
 {% endswagger-parameter %}
@@ -46,10 +38,6 @@ The category of the pool. One of:
 {% swagger-parameter in="query" name="search[order]" type="String" %}
 The order of the returned results. One of: 
 
-`updated_at`
-
-, 
-
 `name`
 
 , 
@@ -59,6 +47,14 @@ The order of the returned results. One of:
 , 
 
 `post_count`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[id]" type="String" %}
+See 
+
+[Search Parameters: search\[id\]](common/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" %}
@@ -155,9 +151,11 @@ The ID of the pool to get.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:green;">Moderator+</mark>, account must be older than 1 week
+Unless <mark style="color:red;">Moderator+</mark>, account must be at least 1 week old.
 
-Duplicate post IDs are silently dropped
+Duplicate {ost IDs are silently dropped.
+
+Post IDs are not validated.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="pool[name]" required="true" %}

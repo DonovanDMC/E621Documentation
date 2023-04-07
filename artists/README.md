@@ -5,6 +5,14 @@
 
 {% endswagger-description %}
 
+{% swagger-parameter in="query" name="search[name]" type="String" %}
+The name of the artist.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[group_name]" type="String" %}
+The group name of the artist.
+{% endswagger-parameter %}
+
 {% swagger-parameter in="query" name="search[any_other_name_like]" %}
 Any name being similar.
 {% endswagger-parameter %}
@@ -126,17 +134,13 @@ See
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="get" path="/artists/:id.json" baseUrl="https://e621.net" summary="Get An Artist" %}
+{% swagger method="get" path="/artists/:nameOrID.json" baseUrl="https://e621.net" summary="Get An Artist" %}
 {% swagger-description %}
 
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="id" required="true" type="String" %}
-The ID of the artist to get.
-
-
-
-You can put a name here, but I'd recommend using the search instead.
+{% swagger-parameter in="path" name="nameOrID" required="true" type="String" %}
+The name or ID of the artist to get.
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Successful" %}
@@ -198,7 +202,7 @@ You can put a name here, but I'd recommend using the search instead.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old
 
 `other_names` & `urls` are silently truncated to 25 entries
 
@@ -533,7 +537,7 @@ The urls associated with the artist.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old
 
 This operation is idempotent
 {% endswagger-description %}
