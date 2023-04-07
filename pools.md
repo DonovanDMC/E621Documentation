@@ -153,7 +153,7 @@ The ID of the pool to get.
 
 Unless <mark style="color:red;">Moderator+</mark>, account must be at least 1 week old.
 
-Duplicate {ost IDs are silently dropped.
+Duplicate post IDs are silently dropped.
 
 Post IDs are not validated.
 {% endswagger-description %}
@@ -326,4 +326,3 @@ Max: 1000
 ```
 {% endswagger-response %}
 {% endswagger %}
-

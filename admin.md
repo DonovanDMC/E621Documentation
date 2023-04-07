@@ -140,7 +140,7 @@ The user's new blacklist.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Admin+ Required</mark>
 {% endswagger-description %}
 
 {% swagger-parameter in="query" name="page" type="Number" %}

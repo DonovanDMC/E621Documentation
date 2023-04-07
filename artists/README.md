@@ -202,7 +202,7 @@ The name or ID of the artist to get.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old.
 
 `other_names` & `urls` are silently truncated to 25 entries
 
@@ -397,7 +397,7 @@ The ID of the artist to delete.
 
 <mark style="color:red;">Janitor+ Required</mark> if artist is locked or inactive
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week.
 
 `other_names` & `urls` are silently truncated to 25 entries
 
@@ -537,9 +537,9 @@ The urls associated with the artist.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old.
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}

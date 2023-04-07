@@ -757,4 +757,3 @@ The ID of the comment.
 ```
 {% endswagger-response %}
 {% endswagger %}
-

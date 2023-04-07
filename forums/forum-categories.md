@@ -2,6 +2,7 @@
 description: >-
   These are very poorly documented as the routes are admin only, typically only
   respond with html (unless an error shows up), and are extremely unpredictable.
+  They have only been included to completely fill out the Forums section.
 ---
 
 # Forum Categories
@@ -179,4 +180,3 @@ The ID of the forum category to delete.
 </strong></code></pre>
 {% endswagger-response %}
 {% endswagger %}
-

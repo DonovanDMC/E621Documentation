@@ -135,7 +135,7 @@ The ID of the note.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" required="true" name="note[post_id]" type="Number" %}
@@ -260,7 +260,7 @@ A pass-through string.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -385,7 +385,7 @@ Unless <mark style="color:blue;">Privileged+</mark>, account must be at least on
 
 This operation is idempotent.
 
-Unless your account is not old enough or the post has notes locked, a success will always be returned (even if the note does not exist)
+A success will be returned even if the note does not exist.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
