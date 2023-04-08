@@ -1,4 +1,4 @@
-# Sets
+# Post Sets
 
 
 
@@ -32,15 +32,13 @@ The ID of the creator of the set. Accepts a comma separated list.
 {% swagger-parameter in="query" name="search[order]" type="String" required="false" %}
 The order of the returned results. One of:
 
-`updated_at`, `name`, `shortname`
-
-`created_at`, `post_count`
+`update`, `updated_at`, `name`, `shortname`, `created_at`, `postcount`, `post_count`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[is_public]" type="Boolean" required="false" %}
 If the set is public.
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" required="false" %}
@@ -87,7 +85,7 @@ See
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="get" path="/post_sets/:id.json" baseUrl="https://e621.net" summary="Get A Set" %}
+{% swagger method="get" path="/post_sets/:id.json" baseUrl="https://e621.net" summary="Get A Post Set" %}
 {% swagger-description %}
 
 {% endswagger-description %}
@@ -139,7 +137,7 @@ The ID of the set to get.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="post" path="/post_sets.json" baseUrl="https://e621.net" summary="Create A Set" %}
+{% swagger method="post" path="/post_sets.json" baseUrl="https://e621.net" summary="Create A Post Set" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
@@ -301,7 +299,7 @@ If parents of deleted posts are transferred into the set.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="patch" path="/post_sets/:id.json" baseUrl="https://e621.net" summary="Modify A Set" %}
+{% swagger method="patch" path="/post_sets/:id.json" baseUrl="https://e621.net" summary="Modify A Post Set" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
@@ -413,7 +411,7 @@ The ID of the set.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="delete" path="/post_sets/:id.json" baseUrl="https://e621.net" summary="Delete A Set" %}
+{% swagger method="delete" path="/post_sets/:id.json" baseUrl="https://e621.net" summary="Delete A Post Set" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
@@ -443,6 +441,166 @@ The ID of the set.
 {
   "success": false,
   "reason": "not found"
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="post" path="/post_sets/:id/add_posts.json" baseUrl="https://e621.net" summary="Add Posts To Post Set" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:yellow;">Admin+ Required</mark> if the post set isn't owned or maintained by you.
+
+While the limit is 10,000 posts, attempting to add that many posts at once will most likely result in a timeout with status code 524. A request that would take the set over the 10,000 post limit will fail and none of the posts will be added.
+
+Invalid IDs are silently dropped.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the post set.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="post_ids[]" required="true" %}
+An array of post IDs to add to the set.
+
+Limit: 10,000
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="Success" %}
+```javascript
+{
+  "post_ids": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "shortname": "shortname",
+  "name": "name",
+  "is_public": false,
+  "post_count": 4,
+  "id": 0,
+  "description": "description",
+  "transfer_on_delete": true,
+  "creator_id": 0,
+  "created_at": "0000-00-00T00:00:00.000-00:00",
+  "updated_at": "0000-00-00T00:00:00.000-00:00"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="201: Created" description="Success (No Changes)" %}
+```javascript
+// The same as above, but post_ids comes after name in the response.
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Acesss Denied" %}
+```javascript
+{
+  "success": false,
+  "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Not Found" %}
+```javascript
+{
+  "success": false,
+  "reason": "not found"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="422: Unprocessable Entity" description="Post Set Too Large" %}
+```javascript
+{
+  "errors": {
+    "base": [
+      "Sets can have up to 10,000 posts each"
+    ]
+  }
+}
+```
+{% endswagger-response %}
+
+
+{% swagger-response status="500: Internal Server Error" description="Post IDs Missing" %}
+```javascript
+{
+  "success": false,
+  "message": "An unexpected error occurred.",
+  "code": ""
+}
+```
+{% endswagger-response %}
+{% endswagger %}
+
+{% swagger method="post" path="/post_sets/:id/remove_posts.json" baseUrl="https://e621.net" summary="Remove Posts From Post Set" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:yellow;">Admin+ Required</mark> if the post set isn't owned or maintained by you.
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the post set.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="body" name="post_ids[]" required="true" %}
+An array of post IDs to remove from the set.
+{% endswagger-parameter %}
+
+{% swagger-response status="201: Created" description="Success" %}
+```javascript
+{
+  "post_ids": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "shortname": "shortname",
+  "name": "name",
+  "is_public": false,
+  "post_count": 4,
+  "id": 0,
+  "description": "description",
+  "transfer_on_delete": true,
+  "creator_id": 0,
+  "created_at": "0000-00-00T00:00:00.000-00:00",
+  "updated_at": "0000-00-00T00:00:00.000-00:00"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Acesss Denied" %}
+```javascript
+{
+  "success": false,
+  "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Not Found" %}
+```javascript
+{
+  "success": false,
+  "reason": "not found"
+}
+```
+{% endswagger-response %}
+
+
+{% swagger-response status="500: Internal Server Error" description="Post IDs Missing" %}
+```javascript
+{
+  "success": false,
+  "message": "An unexpected error occurred.",
+  "code": ""
 }
 ```
 {% endswagger-response %}
