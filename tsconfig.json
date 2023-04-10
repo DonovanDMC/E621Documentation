@@ -1,0 +1,5 @@
+{
+  "extends": "@uwu-codes/tsconfig/esm",
+  "include": ["**/*"],
+  "exclude": ["node_modules"]
+}
