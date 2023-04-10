@@ -141,7 +141,7 @@ The ID of the set to get.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:red;">Janitor+</mark>, account must be older than 3 days to create public sets
+Unless <mark style="color:red;">Janitor+</mark>, account must be older than 3 days to create public sets.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="post_set[name]" required="true" type="String" %}
