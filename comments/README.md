@@ -235,9 +235,9 @@ The ID of the comment.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -297,9 +297,9 @@ The type of warning to add to the comment. One of:
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+Required</mark> if the comment is not yours
+<mark style="color:red;">Moderator+Required</mark> If the comment is not yours.
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -342,9 +342,9 @@ The ID of the comment to hide.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark> regardless
+<mark style="color:red;">Moderator+ Required</mark>
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -387,7 +387,7 @@ The ID of the blip to unhide.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="comment[body]" type="String" required="true" %}
@@ -407,13 +407,13 @@ If the post should not be bumped.
 {% swagger-parameter in="body" name="comment[is_hidden]" type="Boolean" %}
 If the comment should be hidden.
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="comment[is_sticky]" type="Boolean" %}
 If the comment should be stuck to the top of the comment section (post as moderator).
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-response status="201: Created" description="Success" %}
@@ -516,13 +516,13 @@ If the comment should be stuck to the top of the comment section (post as modera
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark> if the comment is not yours
+<mark style="color:red;">Moderator+ Required</mark> If the comment is not yours.
 
 Edits performed within 5 minutes of creation will not show the "edited" text
 
 If the comment is not yours, the edit text will show "updated by NAME". This ignores the normal time window.
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="comment[body]" type="String" %}
@@ -538,13 +538,13 @@ The ID of the comment.
 {% swagger-parameter in="body" name="comment[is_hidden]" type="Boolean" %}
 If the comment should be hidden.
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="comment[is_sticky]" type="Boolean" %}
 If the comment should be stuck to the top of the comment section (post as moderator).
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-response status="204: No Content" description="Success" %}
@@ -605,7 +605,7 @@ If the comment should be stuck to the top of the comment section (post as modera
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:yellow;">Admin+ Required</mark>
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -645,7 +645,7 @@ To remove an existing vote, send a request with the current vote. (e.g. -1 = sen
 
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -757,4 +757,3 @@ The ID of the comment.
 ```
 {% endswagger-response %}
 {% endswagger %}
-

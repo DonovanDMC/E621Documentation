@@ -5,36 +5,36 @@
 
 {% endswagger-description %}
 
-{% swagger-parameter in="body" name="search[id]" type="String" %}
-See 
-
-[Search Parameters: search\[id\]](common/search-parameters.md#search-id)
-
-
+{% swagger-parameter in="body" name="search[body_matches]" type="String" %}
+The body of the note.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="search[is_active]" type="Boolean" %}
 If the note is active.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="search[body_matches]" type="String" %}
-The body of the note.
+{% swagger-parameter in="body" name="search[post_id]" type="Number" %}
+The ID of the post the note is on. Multiple posts can be provided as a comma separated list.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="search[creator_id]" type="Number" %}
-The ID of the creator of the note.
+{% swagger-parameter in="body" name="search[post_tags_match]" type="String" %}
+The tags of the post the note is on.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="search[creator_name]" type="String" %}
 The name of the creator of the note.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="search[post_id]" type="Number" %}
-The ID of the post the note is on.
+{% swagger-parameter in="body" name="search[creator_id]" type="Number" %}
+The ID of the creator of the note.
 {% endswagger-parameter %}
 
-{% swagger-parameter in="body" name="search[post_tags_match]" type="String" %}
-The tags of the post the note is on.
+{% swagger-parameter in="body" name="search[id]" type="String" %}
+See 
+
+[Search Parameters: search\[id\]](common/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="limit" type="Number" %}
@@ -86,10 +86,18 @@ See
 
 {% swagger method="get" path="/notes/:id.json" baseUrl="https://e621.net" summary="Get A Note" %}
 {% swagger-description %}
-Visiting /notes/:id in html form will redirect to /posts/:postID/
+Visiting 
+
+`/notes/:id`
+
+ in html form will redirect to 
+
+`/posts/:postID`
+
+ with the note highlighted.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="id" type="Number" %}
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
 The ID of the note.
 {% endswagger-parameter %}
 
@@ -127,10 +135,10 @@ The ID of the note.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old.
 {% endswagger-description %}
 
-{% swagger-parameter in="body" required="true" name="n" type="Number" %}
+{% swagger-parameter in="body" required="true" name="note[post_id]" type="Number" %}
 The ID of the post the note is for.
 {% endswagger-parameter %}
 
@@ -248,11 +256,11 @@ A pass-through string.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="patch" path="/notes/:id.json" baseUrl="https://e621.net" summary="Modify A Note" %}
+{% swagger method="patch" path="/notes/:id.json" baseUrl="https://e621.net" summary="Edit A Note" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -373,14 +381,14 @@ The body of the note.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old.
 
-This operation is idempotent
+This operation is idempotent.
 
-Unless your account is not old enough or the post has notes locked, a success will always be returned (even if the note does not exist)
+A success will be returned even if the note does not exist.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="id" type="Number" %}
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
 The ID of the note to delete.
 {% endswagger-parameter %}
 

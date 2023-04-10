@@ -133,7 +133,7 @@ The ID of the blip.
 
 <mark style="color:red;">Moderator+ Required</mark>
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -193,9 +193,9 @@ The type of warning to add to the blip. One of:
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:red;">Moderator+Required</mark> if the blip is not yours
+<mark style="color:red;">Moderator+Required</mark> If the blip is not yours.
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -233,9 +233,9 @@ The ID of the blip to hide.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:red;">Moderator+ Required</mark> regardless
+<mark style="color:red;">Moderator+ Required</mark>
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="false" %}
@@ -273,7 +273,7 @@ The ID of the blip to unhide.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-Unless <mark style="color:blue;">Privileged+</mark>, account must be older than 1 week
+Unless <mark style="color:blue;">Privileged+</mark>, account must be at least one week old
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="blip[body]" type="String" required="true" %}
@@ -350,13 +350,13 @@ The ID of the blip to respond to.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="patch" path="/blips/:id.json" baseUrl="https://e621.net" summary="Modify A Blip" %}
+{% swagger method="patch" path="/blips/:id.json" baseUrl="https://e621.net" summary="Edit A Blip" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:red;">Moderator+ Required</mark> if the blip is not yours
+<mark style="color:red;">Moderator+ Required</mark> If the blip is not yours.
 
-<mark style="color:yellow;">Admin+ Required</mark> if the blip is older than 5 minutes
+<mark style="color:yellow;">Admin+ Required</mark> If the blip is older than 5 minutes.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}

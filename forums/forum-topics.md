@@ -6,16 +6,8 @@ An alias for `/forum_topics` exists: `/ftopics`
 {% swagger-description %}
 Some topics may be in specific categories that require certain user levels.
 
-E621 does not provide a form to search topics, so the information here may be inaccurate or incomplete.
+<mark style="color:red;">Moderator+ Required</mark> To search hidden forum topics not created by authenticated user.
 {% endswagger-description %}
-
-{% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
-See 
-
-[Search Parameters: search\[id\]](../common/search-parameters.md#search-id)
-
-
-{% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[title_matches]" type="String" required="false" %}
 The title of the forum topic (fuzzy matching).
@@ -45,6 +37,14 @@ The ID of the category the forum topic is in.
 The order of the returned results. One of:
 
 `sticky`
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
+See 
+
+[Search Parameters: search\[id\]](../common/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" required="false" %}
@@ -140,9 +140,9 @@ The ID of the forum topic to get.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+Required</mark> if the topic is not yours
+<mark style="color:red;">Moderator+Required</mark> If the topic is not yours.
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -190,9 +190,9 @@ The ID of the forum topic to hide.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark> regardless
+<mark style="color:red;">Moderator+ Required</mark>
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="false" %}
@@ -240,7 +240,7 @@ The ID of the forum topic to unhide.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 
 The original forum topic may be left in a broken state after merging.
 {% endswagger-description %}
@@ -274,9 +274,9 @@ The ID of the topic to merge into.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark> if the topic is not visible to you (hidden or otherwise)
+<mark style="color:red;">Moderator+ Required</mark> If the topic is not visible to you (hidden or otherwise).
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -324,9 +324,9 @@ The ID of the topic to subscribe to.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark> if the topic is not visible to you (hidden or otherwise)
+<mark style="color:red;">Moderator+ Required</mark> If the topic is not visible to you (hidden or otherwise).
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -420,13 +420,13 @@ The ID of the post to use as the first post of this topic. Mutually exclusive wi
 {% swagger-parameter in="body" name="forum_topic[is_sticky]" type="Boolean" required="false" %}
 If the topic is sticky.
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="forum_topic[is_locked]" type="Boolean" required="false" %}
 If the topic is locked.
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-response status="201: Created" description="Success" %}
@@ -541,14 +541,14 @@ If the topic is locked.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="patch" path="/forum_topics/:id.json" baseUrl="https://e621.net" summary="Modify A Forum Topic" %}
+{% swagger method="patch" path="/forum_topics/:id.json" baseUrl="https://e621.net" summary="Edit A Forum Topic" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark> if the forum topic is not yours
+<mark style="color:red;">Moderator+ Required</mark> If the forum topic is not yours.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" type="Numbe" %}
+{% swagger-parameter in="path" type="Numbe" required="true" %}
 The ID of the forum topic to edit.
 {% endswagger-parameter %}
 
@@ -579,13 +579,13 @@ The ID of the post to use as the first post of this topic. Mutually exclusive wi
 {% swagger-parameter in="body" name="forum_topic[is_sticky]" type="Boolean" %}
 If the topic is sticky.
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-parameter in="body" name="forum_topic[is_locked]" type="Boolean" %}
 If the topic is locked.
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 {% endswagger-parameter %}
 
 {% swagger-response status="204: No Content" description="Success" %}
@@ -616,10 +616,10 @@ If the topic is locked.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:yellow;">Admin+ Required</mark>
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="id" type="Number" %}
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
 The ID of the forum topic to delete.
 {% endswagger-parameter %}
 

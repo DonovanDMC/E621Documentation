@@ -6,7 +6,7 @@
 
 <mark style="color:red;">Moderator+ Required</mark> If `user_id` is blocked, or has privacy mode on
 
-The authenticated user bypasses pivacy mode checks, but not block checks.
+The authenticated user bypasses privacy mode checks, but not block checks.
 {% endswagger-description %}
 
 {% swagger-parameter in="query" name="user_id" type="Number" %}

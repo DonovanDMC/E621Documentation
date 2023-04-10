@@ -1,10 +1,10 @@
 # Admin
 
-{% swagger method="put" path="/admin/users/:id.json" baseUrl="https://e621.net" summary="Edit A User" %}
+{% swagger method="patch" path="/admin/users/:id.json" baseUrl="https://e621.net" summary="Edit A User" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:yellow;">Admin+ Required</mark>
 
 Even if unchanged, `user[level]` MUST be provided, else a 500 Internal Server Error will be returned, along with making a junk mod action entry.
 
@@ -108,7 +108,7 @@ If the user has unrestricted uploads.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:yellow;">Admin+ Required</mark>
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -140,7 +140,7 @@ The user's new blacklist.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Admin+ Required</mark>
 {% endswagger-description %}
 
 {% swagger-parameter in="query" name="page" type="Number" %}

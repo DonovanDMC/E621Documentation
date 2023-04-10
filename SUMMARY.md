@@ -19,6 +19,7 @@
   * [Forum Categories](forums/forum-categories.md)
   * [Forum Topics](forums/forum-topics.md)
   * [Forum Posts](forums/forum-posts.md)
+* [Help Pages](help-pages.md)
 * [Pools](pools.md)
 * [Notes](notes.md)
 * [Post Sets](post_sets.md)

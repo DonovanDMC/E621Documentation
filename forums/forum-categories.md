@@ -2,17 +2,18 @@
 description: >-
   These are very poorly documented as the routes are admin only, typically only
   respond with html (unless an error shows up), and are extremely unpredictable.
+  They have only been included to completely fill out the Forums section.
 ---
 
 # Forum Categories
 
 GET /forum\_categories does not support JSON
 
-{% swagger method="post" path="/forum_categories.json" baseUrl="https://e621.net" summary="Create Forum Category" %}
+{% swagger method="post" path="/forum_categories.json" baseUrl="https://e621.net" summary="Create A Forum Category" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:yellow;">Admin Required</mark>
+<mark style="color:yellow;">Admin+ Required</mark>
 
 Due to this being admin only and typically ui based, there are no standard responses for errors or otherwise.
 {% endswagger-description %}
@@ -77,11 +78,11 @@ The sorting order of this category.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="patch" path="/forum_categories/:id.json" baseUrl="https://e621.net" summary="Edit Forum Category" %}
+{% swagger method="patch" path="/forum_categories/:id.json" baseUrl="https://e621.net" summary="Edit A Forum Category" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:yellow;">Admin Required</mark>
+<mark style="color:yellow;">Admin+ Required</mark>
 
 Due to this being admin only and typically ui based, there are no standard responses for errors or otherwise.
 {% endswagger-description %}
@@ -144,7 +145,7 @@ The sorting order of this category.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:yellow;">Admin Required</mark>
+<mark style="color:yellow;">Admin+ Required</mark>
 
 As fa as I can tell, there is no way to use this from the ui, so forum categories are not meant to be deleted. They still can be deleted, but it will return an error
 {% endswagger-description %}
@@ -179,4 +180,3 @@ The ID of the forum category to delete.
 </strong></code></pre>
 {% endswagger-response %}
 {% endswagger %}
-

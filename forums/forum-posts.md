@@ -4,16 +4,10 @@ An alias for `/forum_posts` exists: `/fposts`
 
 {% swagger method="get" path="/forum_posts.json" baseUrl="https://e621.net" summary="Search Forum Posts" %}
 {% swagger-description %}
+Some topics may be in specific categories that require certain user levels.
 
+<mark style="color:red;">Moderator+ Required</mark> To search hidden forum posts not created by authenticated user.
 {% endswagger-description %}
-
-{% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
-See 
-
-[Search Parameters: search\[id\]](../common/search-parameters.md#search-id)
-
-
-{% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[topic_title_matches]" type="String" required="false" %}
 The title of the topic the forum post is under.
@@ -33,6 +27,18 @@ The name of the creator of the forum post.
 
 {% swagger-parameter in="query" name="search[topic_category_id]" type="Number" required="false" %}
 The ID of the category the forum post is under
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[is_hidden]" type="Boolean" %}
+If the forum post is hidden.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="search[id]" type="Number" required="false" %}
+See 
+
+[Search Parameters: search\[id\]](../common/search-parameters.md#search-id)
+
+
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" required="false" %}
@@ -81,7 +87,7 @@ See
 
 {% swagger method="get" path="/forum_posts/:id.json" baseUrl="https://e621.net" summary="Get Forum Post" %}
 {% swagger-description %}
-
+Some posts may be in specific categories that require certain user levels.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -128,9 +134,9 @@ The ID of the forum post to get.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark>
+<mark style="color:red;">Moderator+ Required</mark>
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -190,9 +196,9 @@ The type of warning to add to the forum post. One of:
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+Required</mark> if the post is not yours
+<mark style="color:red;">Moderator+Required</mark> If the post is not yours.
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -239,12 +245,12 @@ The ID of the forum post to hide.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark> regardless
+<mark style="color:red;">Moderator+ Required</mark>
 
-This operation is idempotent
+This operation is idempotent.
 {% endswagger-description %}
 
-{% swagger-parameter in="path" name="id" type="Number" required="false" %}
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
 The ID of the forum post to unhide.
 {% endswagger-parameter %}
 
@@ -394,11 +400,11 @@ The body of the forum post.
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="patch" path="/forum_posts/:id.json" baseUrl="https://e621.net" summary="Modify A Forum Post" %}
+{% swagger method="patch" path="/forum_posts/:id.json" baseUrl="https://e621.net" summary="Edit A Forum Post" %}
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:green;">Moderator+ Required</mark> if the forum post is not yours
+<mark style="color:red;">Moderator+ Required</mark> If the forum post is not yours.
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
@@ -449,7 +455,7 @@ The body of the forum post.
 {% swagger-description %}
 <mark style="color:blue;">Authorization Required</mark>
 
-<mark style="color:yellow;">Admin Required</mark>
+<mark style="color:yellow;">Admin+ Required</mark>
 {% endswagger-description %}
 
 {% swagger-parameter in="path" name="id" type="Number" required="true" %}
