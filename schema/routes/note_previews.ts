@@ -23,7 +23,7 @@ export namespace NotePreview {
     export const Route = {
         method:      "GET",
         path:        "/note_previews.json",
-        name:        "List Popular Posts",
+        name:        "Preview Note",
         auth:        false,
         description: null,
         parameters:  [
