@@ -22,7 +22,7 @@ export default class CommonParameters {
     }
 
     nested(level: number) {
-        this.params = this.params.map(obj => ({ ...obj, description: obj.description.replace(/common\//, `${"../".repeat(level)}common/`) }));
+        this.params = this.params.map(obj => ({ ...obj, description: obj.description.replace(/other\//, `${"../".repeat(level)}other/`) }));
         return this;
     }
 

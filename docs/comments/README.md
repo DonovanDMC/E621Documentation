@@ -18,7 +18,7 @@ The tags of the posts.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="page" type="String" %}
-See [Search Parameters: page](other/search_parameters.md#page)
+See [Search Parameters: page](../other/search_parameters.md#page)
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Success (Results)" %}
@@ -155,7 +155,7 @@ The ID of the user that created the post the comment is on.
 {% swagger-parameter in="query" name="search[ip_addr]" type="String" %}
 The IP Address of the creator of the comment.
 
-See [Search Parameters: search\[ip\_addr\]](other/search_parameters.md#search-ip\_addr).
+See [Search Parameters: search\[ip\_addr\]](../other/search_parameters.md#search-ip\_addr).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[order]" type="String" %}
@@ -163,15 +163,15 @@ The order of the returned results. One of: `post_id`, `post_id_desc`, `score`, `
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[id]" type="Number" %}
-See [Search Parameters: search\[id\]](other/search_parameters.md#search-id)
+See [Search Parameters: search\[id\]](../other/search_parameters.md#search-id)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" %}
-See [Search Parameters: limit](other/search_parameters.md#limit)
+See [Search Parameters: limit](../other/search_parameters.md#limit)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="page" type="String" %}
-See [Search Parameters: page](other/search_parameters.md#page)
+See [Search Parameters: page](../other/search_parameters.md#page)
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Success (Results)" %}
