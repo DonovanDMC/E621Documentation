@@ -141,10 +141,10 @@ description: >-\n\
 
 export const Links = {
     Search: {
-        IP_ADDR: "[Search Parameters: search\\[ip\\_addr\\]](common/search-parameters.md#search-ip\\_addr)",
-        ID:      "[Search Parameters: search\\[id\\]](common/search-parameters.md#search-id)",
-        LIMIT:   "[Search Parameters: limit](common/search-parameters.md#limit)",
-        PAGE:    "[Search Parameters: page](common/search-parameters.md#page)"
+        IP_ADDR: "[Search Parameters: search\\[ip\\_addr\\]](other/search_parameters.md#search-ip\\_addr)",
+        ID:      "[Search Parameters: search\\[id\\]](other/search_parameters.md#search-id)",
+        LIMIT:   "[Search Parameters: limit](other/search_parameters.md#limit)",
+        PAGE:    "[Search Parameters: page](other/search_parameters.md#page)"
     },
     SearchInconsistency: "See https://github.com/e621ng/e621ng/issues/359"
 };

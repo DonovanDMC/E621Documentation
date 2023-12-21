@@ -29,7 +29,7 @@ If the artist is active.
 {% swagger-parameter in="query" name="search[ip_addr]" type="String" %}
 The ip address of the updater.
 
-See [Search Parameters: search\[ip\_addr\]](../common/search-parameters.md#search-ip\_addr).
+See [Search Parameters: search\[ip\_addr\]](other/search_parameters.md#search-ip\_addr).
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[order]" type="String" %}
@@ -37,15 +37,15 @@ The order of the returned results. One of: `name`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[id]" type="Number" %}
-See [Search Parameters: search\[id\]](../common/search-parameters.md#search-id)
+See [Search Parameters: search\[id\]](other/search_parameters.md#search-id)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" %}
-See [Search Parameters: limit](../common/search-parameters.md#limit)
+See [Search Parameters: limit](other/search_parameters.md#limit)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="page" type="String" %}
-See [Search Parameters: page](../common/search-parameters.md#page)
+See [Search Parameters: page](other/search_parameters.md#page)
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Success (Results)" %}

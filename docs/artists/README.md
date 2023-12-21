@@ -53,15 +53,15 @@ The order of the returned results. One of: `updated_at`, `name`, `post_count`
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="search[id]" type="Number" %}
-See [Search Parameters: search\[id\]](../common/search-parameters.md#search-id)
+See [Search Parameters: search\[id\]](other/search_parameters.md#search-id)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" %}
-See [Search Parameters: limit](../common/search-parameters.md#limit)
+See [Search Parameters: limit](other/search_parameters.md#limit)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="page" type="String" %}
-See [Search Parameters: page](../common/search-parameters.md#page)
+See [Search Parameters: page](other/search_parameters.md#page)
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Success (Results)" %}

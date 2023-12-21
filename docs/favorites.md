@@ -14,11 +14,11 @@ The ID of the user whose favorites to get.
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="limit" type="Number" %}
-See [Search Parameters: limit](common/search-parameters.md#limit)
+See [Search Parameters: limit](other/search_parameters.md#limit)
 {% endswagger-parameter %}
 
 {% swagger-parameter in="query" name="page" type="String" %}
-See [Search Parameters: page](common/search-parameters.md#page)
+See [Search Parameters: page](other/search_parameters.md#page)
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="Success" %}

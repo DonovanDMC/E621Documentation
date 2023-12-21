@@ -15,7 +15,7 @@
     "content": "Other information related to e621 and its apis."
   },
   {
-    "source": "common_errors.md",
+    "source": "errors.md",
     "file": "other/errors.md",
     "category": [
       "Errors",
