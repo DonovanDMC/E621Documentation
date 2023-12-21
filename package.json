@@ -26,5 +26,8 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "dpdm": "^3.13.0"
+  }
 }
