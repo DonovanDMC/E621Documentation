@@ -287,3 +287,73 @@ Max: 1000
 {% endswagger-response %}
 
 {% endswagger %}
+
+{% swagger method="delete" path="/pools/{id}.json" baseUrl="https://e621.net" summary="Delete Pool" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+<mark style="color:red;">Janitor+ Required</mark>
+
+{% endswagger-description %}
+
+{% swagger-response status="204: No Content" description="Success" %}
+
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+  "success": false,
+  "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Not Found" %}
+```javascript
+{
+  "success": false,
+  "reason": "not found"
+}
+```
+{% endswagger-response %}
+
+{% endswagger %}
+
+{% swagger method="put" path="/pools/{id}/revert.json" baseUrl="https://e621.net" summary="Revert Pool" %}
+{% swagger-description %}
+<mark style="color:blue;">Authorization Required</mark>
+
+{% endswagger-description %}
+
+{% swagger-parameter in="path" name="id" type="Number" required="true" %}
+The ID of the pool to revert.
+{% endswagger-parameter %}
+
+{% swagger-parameter in="query" name="version_id" type="Number" required="true" %}
+The ID of the version to revert to.
+{% endswagger-parameter %}
+
+{% swagger-response status="204: No Content" description="Success" %}
+
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Access Denied" %}
+```javascript
+{
+  "success": false,
+  "reason": "Access Denied"
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Not Found" %}
+```javascript
+{
+  "success": false,
+  "reason": "not found"
+}
+```
+{% endswagger-response %}
+
+{% endswagger %}

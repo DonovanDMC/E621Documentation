@@ -25,6 +25,7 @@ export const Comments = [
 export const Order = [
     "SearchNotes", "GetNote", "CreateNote", "EditNote", "DeleteNote"
 ];
+export const File = "notes/README.md";
 
 // the notes controller renders errors differently
 function expectedError<T extends string>(title: string, errors: Array<T>, comment?: string) {
@@ -50,6 +51,7 @@ export namespace SearchNotes {
             parameter.query("search[creator_id]",      Types.String, "The ID of the creator of the note."),
             commonParameters()
                 .id().limit().page()
+                .nested(1)
         ],
         responses: [
             response(200, "javascript", "Success (Results)",       Type.Array(Note)),

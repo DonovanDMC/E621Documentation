@@ -8,7 +8,8 @@ import {
     AccessDeniedResponse,
     expectedError,
     InternalServerErrorResponse,
-    EmptyArray
+    EmptyArray,
+    NoContentResponse
 } from "../util.js";
 import { Pool } from "../structures/index.js";
 import { commonParameters } from "../CommonParameters.js";
@@ -18,7 +19,7 @@ export const CategoryName = "Pools";
 export const CategoryDescription = "";
 export const Comments = [] satisfies Array<IComment>;
 export const Order = [
-    "SearchPools", "GetPool", "CreatePool"
+    "SearchPools", "GetPool", "CreatePool", "DeletePool", "RevertPool"
 ];
 
 
@@ -90,6 +91,41 @@ export namespace CreatePool {
             expectedError("Hourly Limit Reached",   ["creator",     ["have reached the hourly limit for this action"]]),
             expectedError("Too Many Posts",         ["base",        ["Pools can have up to 1,000 posts each"]]),
             InternalServerErrorResponse("Name Missing")
+        ]
+    } satisfies IRoute;
+}
+
+export namespace DeletePool {
+    export const Route = {
+        method:      "DELETE",
+        path:        "/pools/{id}.json",
+        name:        "Delete Pool",
+        auth:        [true, "janitor"],
+        description: null,
+        parameters:  [],
+        responses:   [
+            NoContentResponse(),
+            AccessDeniedResponse(),
+            NotFoundResponse()
+        ]
+    } satisfies IRoute;
+}
+
+export namespace RevertPool {
+    export const Route = {
+        method:      "PUT",
+        path:        "/pools/{id}/revert.json",
+        name:        "Revert Pool",
+        auth:        true,
+        description: null,
+        parameters:  [
+            parameter.path("id", Types.Number, "The ID of the pool to revert.", true),
+            parameter.query("version_id", Types.Number, "The ID of the version to revert to.", true)
+        ],
+        responses: [
+            NoContentResponse(),
+            AccessDeniedResponse(),
+            NotFoundResponse()
         ]
     } satisfies IRoute;
 }
