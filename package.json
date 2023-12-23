@@ -4,7 +4,7 @@
   "description": "This is documentation for https://e621.net's api, as theirs is pretty bad.\\ Their [api documentation](https://e621.net/wiki\\_pages/2425) has gotten better, but it's typically hard to read, lacks a lot of endpoints, lacks many parameters which could be useful, and is sometimes even outdated.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node --no-warnings --no-deprecation --experimental-specifier-resolution=node --loader ts-node/esm/transpile-only schema/index.ts"
   },
   "repository": {
     "type": "git",

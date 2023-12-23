@@ -25,3 +25,4 @@
   * [Note Versions](notes/versions.md)
 * [Pools](pools.md)
 * [Post Sets](post_sets.md)
+* [Uploads](uploads.md)

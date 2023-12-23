@@ -1,6 +1,6 @@
 # Note Previews
 
-{% swagger method="get" path="/note_previews.json" baseUrl="https://e621.net" summary="List Popular Posts" %}
+{% swagger method="get" path="/note_previews.json" baseUrl="https://e621.net" summary="Preview Note" %}
 {% swagger-description %}
 {% endswagger-description %}
 

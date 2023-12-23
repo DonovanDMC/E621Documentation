@@ -19,7 +19,7 @@ import { STATUS_CODES } from "node:http";
 
 export type UserLevels = "member" | "privileged" | "former-staff" | "janitor" | "moderator" | "admin" | "bd-staff";
 
-export const AccessDeniedResponse = (name = "Access Denied") => errorMessageResponse(name, "Access Denied", "none", 403);
+export const AccessDeniedResponse = (name = "Access Denied", message?: string) => errorMessageResponse(name, `Access Denied${message ? `: ${message}` : ""}`, "none", 403);
 export const NotFoundResponse = (name = "Not Found") => errorMessageResponse(name, "not found", "none", 404);
 export const InternalServerErrorResponse = (name = "Internal Server Error") => errorMessageResponse(name, "An unexpected error occurred.", true, 500);
 export const NoContentResponse = (name = "Success") => response(204, null, name, null);
