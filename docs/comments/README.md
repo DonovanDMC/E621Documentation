@@ -2,7 +2,7 @@
 
 {% swagger method="get" path="/comments.json" baseUrl="https://e621.net" summary="Search Comments" %}
 {% swagger-description %}
-No comment information will be returned in this route. See [Search Comments (Group By Comment)](./#search-comments-(group-by-comment)). This is for ui use, so it doesn't serve much api use.
+No comment information will be returned in this route. See [Search Comments (Group By Comment)](./#search-comments-group-by-comment). This is for ui use, so it doesn't serve much api use.
 
 This route does not support the `limit` parameter. The maximum results will always be 5.
 
